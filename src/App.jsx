@@ -8,10 +8,13 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import ParticleBackground from './components/ParticleBackground';
 
 export default function App() {
   return (
     <BrowserRouter>
+      {/* State-of-the-Art Interactive Canvas Background System */}
+      <ParticleBackground />
       <Navbar />
       <main>
         <Routes>

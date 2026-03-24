@@ -69,17 +69,34 @@ export default function Services() {
 
       <section className="section-padding" style={{ paddingTop: '2rem' }}>
         <div className="container">
-          <div className="services-grid">
+          <div className="service-highlight-grid">
             {services.map((s, i) => (
-              <div className="service-card glass-card reveal" key={i}>
-                <div className={`service-icon ${s.color}`}>{s.icon}</div>
+              <div 
+                className="service-highlight-card reveal" 
+                key={i}
+                style={{
+                  '--service-color': `var(--accent-${s.color})`,
+                  '--service-color-rgb': `var(--accent-${s.color}-rgb)`
+                }}
+              >
+                <div className="service-bg-num">0{i + 1}</div>
+                <div className={`service-icon ${s.color}`} style={{ width: 'fit-content' }}>
+                  {React.cloneElement(s.icon, { size: 48 })}
+                </div>
                 <h3>{s.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', margin: '1rem 0' }}>{s.desc}</p>
-                <div className="tags" style={{ marginBottom: 0 }}>
-                  {s.tags.map(t => <span key={t}>{t}</span>)}
+                <p>{s.desc}</p>
+                <div className="capability-list">
+                  {s.tags.map((tag, idx) => (
+                    <div className="capability-item" key={idx}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      {tag}
+                    </div>
+                  ))}
                 </div>
                 <Link to="/contact" className="details-link">
-                  Get Started <ArrowRight size={16}/>
+                  Consult Experts <ArrowRight size={18} style={{ marginLeft: '10px' }} />
                 </Link>
               </div>
             ))}

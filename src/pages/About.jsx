@@ -24,82 +24,120 @@ export default function About() {
         <div className="blob blob-2"></div>
         <div className="container">
           <span className="sub-heading">About Us</span>
-          <h1>Empowering Innovation Through <span className="gradient-text">Expertise</span></h1>
-          <p>We are a team of passionate technologists dedicated to building the digital future — one project at a time.</p>
+          <h1>Empowering Innovation <br/>Through <span className="gradient-text">Human Expertise</span></h1>
+          <p>We are a syndicate of designers, engineers, and strategists dedicated to co-creating the digital future with precision and passion.</p>
         </div>
       </section>
 
-      {/* Mission / Vision / Why Us */}
-      <section className="section-padding" style={{ paddingTop: '2rem' }}>
+      {/* Narrative Bento */}
+      <section className="section-padding">
         <div className="container">
-          <div className="about-grid">
-            {[
-              { icon: <Rocket size={40}/>, title: 'Our Mission', desc: 'To redefine the digital landscape by delivering scalable and impactful IT solutions that exceed client expectations.' },
-              { icon: <Eye size={40}/>, title: 'Our Vision', desc: 'To be the leading architect of digital transformation across the global tech ecosystem by 2030.' },
-              { icon: <Award size={40}/>, title: 'Why Choose Us', desc: 'Relentless focus on client success, cutting-edge technology, and unparalleled 24/7 support.' },
-            ].map((c, i) => (
-              <div className="about-card glass-card reveal" key={i}>
-                <div style={{ color: 'var(--accent-cyan)', display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>{c.icon}</div>
-                <h3>{c.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>{c.desc}</p>
-              </div>
-            ))}
+          <div className="about-bento-grid">
+            <div className="about-bento-card reveal">
+              <div className="about-icon-wrapper"><Rocket size={32}/></div>
+              <h3>Our Mission</h3>
+              <p>To redefine the global digital architecture by delivering high-concurrency, scalable solutions that solve complex enterprise challenges.</p>
+            </div>
+            <div className="about-bento-card reveal">
+              <div className="about-icon-wrapper" style={{background: 'rgba(var(--accent-purple-rgb), 0.1)', color: 'var(--accent-purple)'}}><Award size={32}/></div>
+              <h3>Why Us</h3>
+              <p>Relentless focus on performance, 99.9% project success rate, and a 24/7 world-class support ecosystem.</p>
+            </div>
+            <div className="about-bento-card wide reveal">
+              <div className="about-icon-wrapper" style={{background: 'rgba(var(--accent-cyan-rgb), 0.15)'}}><Eye size={32}/></div>
+              <h3>Our Vision</h3>
+              <p>To become the leading catalyst for global digital transformation, setting new standards for technical excellence and human-centric design by 2030. We envision a world where technology seamlessly empowers every human endeavor.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="section-padding" style={{ paddingTop: 0 }}>
-        <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Our Impact</span>
-            <h2>Numbers That <span className="gradient-text">Speak</span></h2>
-          </div>
-          <div className="about-grid" style={{ marginTop: '3rem' }}>
-            {[
-              { icon: <Trophy size={40}/>, stat: '200+', label: 'Projects Delivered' },
-              { icon: <Users size={40}/>, stat: '50+', label: 'Expert Engineers' },
-              { icon: <Globe size={40}/>, stat: '30+', label: 'Countries Served' },
-            ].map((s, i) => (
-              <div className="about-card glass-card reveal" key={i}>
-                <div style={{ color: 'var(--accent-purple)', display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>{s.icon}</div>
-                <div style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--accent-cyan)', fontFamily: 'Outfit' }}>{s.stat}</div>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="section-padding" style={{ paddingTop: 0 }}>
+      {/* The Journey - Vertical Timeline */}
+      <section className="section-padding services-section">
         <div className="container">
           <div className="section-header center reveal">
-            <span className="sub-heading">Our Team</span>
-            <h2>Meet the <span className="gradient-text">Experts</span></h2>
+            <span className="sub-heading">Our Evolution</span>
+            <h2>The Future-Invo <span className="gradient-text">Journey</span></h2>
           </div>
-          <div className="team-grid" style={{ marginTop: '3rem', maxWidth: '700px', margin: '3rem auto 0' }}>
+          <div className="journey-timeline reveal">
+            <div className="milestone-item">
+              <span className="milestone-year">2026</span>
+              <h3>Global Expansion</h3>
+              <p className="text-secondary" style={{maxWidth: '500px'}}>Established strategic hubs in Silicon Valley and London to serve international enterprise partners.</p>
+            </div>
+            <div className="milestone-item">
+              <span className="milestone-year">2024</span>
+              <h3>AI Center of Excellence</h3>
+              <p className="text-secondary" style={{maxWidth: '500px'}}>Launched our specialized AI & Machine Learning wing, delivering custom LLM solutions for Fintech.</p>
+            </div>
+            <div className="milestone-item">
+              <span className="milestone-year">2022</span>
+              <h3>Origins</h3>
+              <p className="text-secondary" style={{maxWidth: '500px'}}>Founded with a core team of senior engineers focused on cloud-native application modernization.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Updated Stats Banner */}
+      <section className="section-padding stats-section">
+        <div className="container">
+          <div className="glass-card center reveal stats-banner-card">
+            <div className="stats-banner-grid">
+              <div>
+                <span className="stat-number-giant">200+</span>
+                <span className="stat-label-large">Projects Delivered</span>
+              </div>
+              <div>
+                <span className="stat-number-giant">50+</span>
+                <span className="stat-label-large">Expert Engineers</span>
+              </div>
+              <div>
+                <span className="stat-number-giant">30+</span>
+                <span className="stat-label-large">Global Hubs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team - Portal Layout */}
+      <section className="section-padding">
+        <div className="container">
+          <div className="section-header center reveal">
+            <span className="sub-heading">Elite Talent</span>
+            <h2>Leadership & <span className="gradient-text">Experts</span></h2>
+          </div>
+          <div className="team-grid mt-4">
             {[
-              { name: 'Alice Wong', role: 'Senior Tech Architect', img: '/team_1.png' },
-              { name: 'David Miller', role: 'Lead AI Developer', img: 'https://i.pravatar.cc/300?u=2' },
+              { name: 'Alice Wong', role: 'Senior Tech Architect', img: 'https://i.pravatar.cc/300?u=12' },
+              { name: 'David Miller', role: 'Lead AI Developer', img: 'https://i.pravatar.cc/300?u=24' },
+              { name: 'Elena Petrova', role: 'Design Principal', img: 'https://i.pravatar.cc/300?u=36' },
             ].map((m, i) => (
-              <div className="glass-card team-card reveal" key={i} style={{ textAlign: 'center' }}>
-                <div className="member-img" style={{ margin: '0 auto 1.5rem' }}>
+              <div className="glass-card team-card reveal" key={i}>
+                <div className="member-img-frame">
                   <img src={m.img} alt={m.name} />
                 </div>
                 <h3>{m.name}</h3>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>{m.role}</p>
+                <p className="text-secondary mt-1">{m.role}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-padding center" style={{ paddingTop: 0 }}>
-        <div className="container">
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '2rem' }}>Ready to work with our world-class team?</p>
-          <Link to="/contact" className="btn btn-primary btn-large">Get In Touch</Link>
+      {/* CTA Section */}
+      <section className="section-padding center">
+        <div className="container glass-card cta-banner-card reveal">
+          <div className="cta-blobs">
+            <div className="blob blob-1"></div>
+            <div className="blob blob-2"></div>
+          </div>
+          <div className="cta-content-wrap">
+            <h2>Let's build the <span className="gradient-text">Future</span> together</h2>
+            <p className="mb-4 font-normal text-secondary" style={{ maxWidth: '600px', margin: '0 auto' }}>Collaborate with our elite engineering team to transform your visionary ideas into scalable reality.</p>
+            <Link to="/contact" className="btn btn-primary btn-large">Initiate Partnership &rarr;</Link>
+          </div>
         </div>
       </section>
     </div>

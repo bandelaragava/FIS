@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Smartphone, Cloud, BrainCircuit, ShieldCheck, Database, ArrowRight } from 'lucide-react';
+import { 
+  Layout, Smartphone, Cloud, BrainCircuit, ShieldCheck, Database, ArrowRight,
+  PenTool, Megaphone, Terminal, Lock, LineChart, Cpu, Check, Activity, Zap, Shield
+} from 'lucide-react';
 
 function useReveal() {
   useEffect(() => {
@@ -15,40 +18,95 @@ function useReveal() {
 
 const services = [
   {
-    icon: <Layout size={28}/>, color: 'purple',
-    title: 'Web Development',
-    desc: 'High-performant, responsive web applications built with the latest technologies like React, Next.js, and Node.js.',
-    tags: ['React', 'Next.js', 'Node.js', 'TypeScript'],
-  },
-  {
-    icon: <Smartphone size={28}/>, color: 'blue',
-    title: 'Mobile App Development',
-    desc: 'Native mobile solutions for iOS and Android that provide seamless user experiences and robust scalability.',
-    tags: ['Swift', 'Kotlin', 'React Native', 'Flutter'],
-  },
-  {
-    icon: <Cloud size={28}/>, color: 'cyan',
-    title: 'Cloud Solutions',
-    desc: 'Expert cloud migration, architecture, and serverless implementation on AWS, Azure, and Google Cloud.',
-    tags: ['AWS', 'Azure', 'GCP', 'Kubernetes'],
-  },
-  {
-    icon: <BrainCircuit size={28}/>, color: 'magenta',
-    title: 'AI & ML Solutions',
-    desc: 'Custom AI and Machine Learning models to automate complex processes and derive deep insights from your data.',
-    tags: ['Python', 'TensorFlow', 'PyTorch', 'LLMs'],
-  },
-  {
-    icon: <ShieldCheck size={28}/>, color: 'orange',
+    icon: <ShieldCheck />, color: '#ffa500', accent: 'orange',
     title: 'IT Consulting',
-    desc: 'Strategic technology consulting to align your infrastructure with your business goals, reducing cost and risk.',
-    tags: ['Strategy', 'DevSecOps', 'Audit', 'Architecture'],
+    level: 'L3 STRATEGIC',
+    desc: 'Alignment of technical infrastructure with high-level business objectives to eliminate bottlenecks and optimize throughput.',
+    tags: ['Ecosystem Audit', 'Strategic Roadmap', 'Risk Mitigation', 'Legacy Sync'],
   },
   {
-    icon: <Database size={28}/>, color: 'green',
-    title: 'Data Engineering',
-    desc: 'End-to-end data pipelines, warehousing, and analytics to turn raw data into actionable business intelligence.',
-    tags: ['Spark', 'Kafka', 'dbt', 'BigQuery'],
+    icon: <Layout />, color: '#7000ff', accent: 'purple',
+    title: 'Web Engineering',
+    level: 'HIGH PERFORMANCE',
+    desc: 'Engineering web platforms that define modern interactions, focusing on millisecond-level responsiveness and massive scale.',
+    tags: ['React Architecture', 'Next.js 14', 'Edge Computing', 'Micro-frontends'],
+  },
+  {
+    icon: <PenTool />, color: '#ff00ff', accent: 'magenta',
+    title: 'UX/UI Architecture',
+    level: 'PRECISION DESIGN',
+    desc: 'Crafting digital experiences that bridge the gap between human intuition and technical logic.',
+    tags: ['Aesthetic Brilliance', 'Behavioral UX', 'Design Systems', 'Motion Logic'],
+  },
+  {
+    icon: <Smartphone />, color: '#0070ff', accent: 'blue',
+    title: 'Mobile Ecosystems',
+    level: 'CROSS PLATFORM',
+    desc: 'Developing high-fidelity iOS and Android solutions that offer native performance with unified codebases.',
+    tags: ['SwiftUI / Kotlin', 'React Native', 'Flutter Logic', 'Offline Sync'],
+  },
+  {
+    icon: <Megaphone />, color: '#00f2ff', accent: 'cyan',
+    title: 'Performance Marketing',
+    level: 'DATA DRIVEN',
+    desc: 'Algorithm-optimized campaigns designed to maximize ROI through deep technical SEO and behavioral analytics.',
+    tags: ['Search Engine Sync', 'Social Engineering', 'LTV Analysis', 'Conversion Logic'],
+  },
+  {
+    icon: <BrainCircuit />, color: '#ff00ff', accent: 'magenta',
+    title: 'Synthetic Intelligence',
+    level: 'NEURAL LOGIC',
+    desc: 'Integrating advanced LLMs and predictive neural networks into existing workflows to automate complex decision-making.',
+    tags: ['Custom LLM Tuning', 'NLU/NLP Systems', 'Predictive Modeling', 'Vision Logic'],
+  },
+  {
+    icon: <Terminal />, color: '#7000ff', accent: 'purple',
+    title: 'Enterprise Software',
+    level: 'L5 OPERATIONS',
+    desc: 'Bespoke internal tools and automated ecosystems designed to solve specific, high-scale operational challenges.',
+    tags: ['Custom ERP/CRM', 'Workflow Automation', 'SaaS Engines', 'Infrastructure Sync'],
+  },
+  {
+    icon: <Cloud />, color: '#00f2ff', accent: 'cyan',
+    title: 'Cloud Orchestration',
+    level: 'CLOUD NATIVE',
+    desc: 'Design and deployment of self-healing, auto-scaling cloud infrastructures on AWS, Azure, and Google Cloud.',
+    tags: ['Serverless Sync', 'K8s Orchestration', 'DevOps Pipeline', 'Site Reliability'],
+  },
+  {
+    icon: <Lock />, color: '#ffa500', accent: 'orange',
+    title: 'Cybersecurity Guard',
+    level: 'ZERO TRUST',
+    desc: 'Deploying advanced defensive perimeters and zero-trust identity management to safeguard digital assets.',
+    tags: ['Pen-Testing', 'Threat Modeling', 'IAM Engineering', 'Data Encryption'],
+  },
+  {
+    icon: <LineChart />, color: '#00ff88', accent: 'green',
+    title: 'Data Intelligence',
+    level: 'BIG DATA L3',
+    desc: 'Processing massive datasets through high-speed pipelines to uncover actionable business intelligence.',
+    tags: ['Pipeline Design', 'Spark/Databricks', 'Predictive BI', 'Stream Processing'],
+  },
+  {
+    icon: <Cpu />, color: '#0070ff', accent: 'blue',
+    title: 'Emerging Frontiers',
+    level: 'R&D LABS',
+    desc: 'Investigating the intersection of Blockchain, IoT, and high-performance computing to future-proof operations.',
+    tags: ['Web3 Protocol', 'IoT Ecosystem', 'Edge Intelligence', 'Post-Quantum'],
+  },
+  {
+    icon: <Database />, color: '#00ff88', accent: 'green',
+    title: 'Full stack web & saas development',
+    level: 'L5 ARCHITECTURE',
+    desc: 'Building scalable, multi-tenant SaaS platforms with complex backend logic and seamless frontend interactions.',
+    tags: ['Multi-tenant Hub', 'SaaS Licensing', 'Microservices', 'Real-time Sync'],
+  },
+  {
+    icon: <Activity />, color: '#7000ff', accent: 'purple',
+    title: 'Machine learning & deep learning',
+    level: 'NEURAL FORGE',
+    desc: 'Developing sophisticated computer vision and NLP models that transform raw data into predictive intelligence.',
+    tags: ['Neural Training', 'Computer Vision', 'NLP Pipelines', 'Predictive Labs'],
   },
 ];
 
@@ -56,83 +114,126 @@ export default function Services() {
   useReveal();
 
   return (
-    <div className="page-wrapper">
-      <section className="page-hero">
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
-        <div className="container">
-          <span className="sub-heading">Our Expertise</span>
-          <h1>Future-Ready <span className="gradient-text">Services</span></h1>
-          <p>Comprehensive technology solutions tailored to your unique business challenges and goals.</p>
+    <div className="page-wrapper services-ecosystem">
+      {/* Dynamic Hero Section */}
+      <section className="page-hero ecosystem-hero">
+        <div className="hero-grid-bg" />
+        <div className="container center">
+          <span className="sub-heading reveal">The Intelligence Portfolio</span>
+          <h1 className="reveal font-giant">Our <span className="gradient-text">Service Ecosystem</span></h1>
+          <p className="reveal text-secondary" style={{ maxWidth: '700px', margin: '1.5rem auto' }}>
+            We deploy multi-disciplinary squads to architect, engineer, and scale high-bandwidth 
+            digital solutions that bridge the gap from concept to market dominance.
+          </p>
+          <div className="hero-tech-status reveal">
+            <div className="status-item"><Activity size={16} /> <span>13 DEPLOYED CATEGORIES</span></div>
+            <div className="status-item"><Zap size={16} /> <span>SUB-SECOND SYSTEM LATENCY</span></div>
+            <div className="status-item"><Shield size={16} /> <span>ENTERPRISE GRADE SECURITY</span></div>
+          </div>
         </div>
       </section>
 
-      <section className="section-padding" style={{ paddingTop: '2rem' }}>
+      {/* Main Service Grid */}
+      <section className="section-padding" style={{ position: 'relative', overflow: 'hidden' }}>
         <div className="container">
-          <div className="service-highlight-grid">
+          <div className="service-portal-grid">
             {services.map((s, i) => (
               <div 
-                className="service-highlight-card reveal" 
-                key={i}
-                style={{
-                  '--service-color': `var(--accent-${s.color})`,
-                  '--service-color-rgb': `var(--accent-${s.color}-rgb)`
-                }}
+                key={i} 
+                id={s.title.toLowerCase().replace(/\s+/g, '-')}
+                className="portal-card reveal" 
+                style={{ '--portal-color': s.color, '--reveal-delay': `${i * 0.05}s` }}
               >
-                <div className="service-bg-num">0{i + 1}</div>
-                <div className={`service-icon ${s.color}`} style={{ width: 'fit-content' }}>
-                  {React.cloneElement(s.icon, { size: 48 })}
+                <div className="card-scanner-beam" />
+                <div className="portal-card-header">
+                  <span className="portal-num">{(i + 1).toString().padStart(2, '0')}</span>
+                  <div className="portal-level-badge">{s.level}</div>
                 </div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-                <div className="capability-list">
-                  {s.tags.map((tag, idx) => (
-                    <div className="capability-item" key={idx}>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      {tag}
-                    </div>
-                  ))}
+
+                <div className="portal-icon-wrap">
+                  <div className="portal-icon-glow" />
+                  <div className="portal-icon-main">{s.icon}</div>
                 </div>
-                <Link to="/contact" className="details-link">
-                  Consult Experts <ArrowRight size={18} style={{ marginLeft: '10px' }} />
-                </Link>
+
+                <h3 className="portal-title">{s.title}</h3>
+                <p className="portal-desc">{s.desc}</p>
+
+                <div className="portal-capability-hub">
+                  <label>Core Capabilities</label>
+                  <div className="portal-tags">
+                    {s.tags.map(tag => (
+                      <span key={tag} className="portal-tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="portal-footer">
+                  <Link to="/contact" className="portal-action-btn">
+                     <span>Initiate Protocol</span>
+                     <ArrowRight size={16} />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="section-padding" style={{ paddingTop: 0 }}>
+      {/* Pricing Section — Synchronized with Home */}
+      <section className="section-padding pricing-section-alt">
         <div className="container">
           <div className="section-header center reveal">
-            <span className="sub-heading">Pricing</span>
-            <h2>Flexible <span className="gradient-text">Plans for Everyone</span></h2>
+            <span className="sub-heading">Global Tiers</span>
+            <h2>Investment <span className="gradient-text">Architecture</span></h2>
           </div>
-          <div className="pricing-grid" style={{ marginTop: '3rem' }}>
+          
+          <div className="pricing-premium-grid">
             {[
-              { name: 'Basic', price: '$1,999', per: '/project start', features: ['Core Web Development', 'Responsive Design', 'SEO Optimization', '1 Month Support'], featured: false },
-              { name: 'Professional', price: '$4,999', per: '/project start', features: ['Web & Mobile Dev', 'Custom AI Integration', 'Cloud Setup & Deploy', '6 Months Support'], featured: true },
-              { name: 'Enterprise', price: 'Custom', per: 'Contact us', features: ['Custom Infrastructure', 'Dedicated Microservices', 'DevSecOps Implementation', '24/7 Priority Support'], featured: false },
+              { 
+                name: 'Essential', 
+                price: '$1,999', 
+                per: '/start', 
+                features: ['UI/UX Blueprint', 'Core Web Platform', 'Standard Security', '30 Days Support'],
+                featured: false
+              },
+              { 
+                name: 'Professional', 
+                price: '$4,999', 
+                per: '/start', 
+                features: ['Premium Custom Design', 'Full-Stack Ecosystem', 'API & Third-Party Sync', '180 Days Priority Support'],
+                featured: true
+              },
+              { 
+                name: 'Enterprise', 
+                price: 'Custom', 
+                per: '/quote', 
+                features: ['Complex Architectures', 'Cloud Native & DevOps', 'Specialized AI Models', '24/7 Dedicated Squad'],
+                featured: false
+              },
             ].map((plan, i) => (
-              <div className={`plan-card glass-card reveal ${plan.featured ? 'featured' : ''}`} key={i}>
-                {plan.featured && <div className="popular-badge">Popular</div>}
-                <div className="plan-header">
+              <div className={`tier-card-premium reveal ${plan.featured ? 'featured' : ''}`} key={i}>
+                {plan.featured && <div className="tier-popular-tag">Optimized Choice</div>}
+                
+                <div className="tier-header">
                   <h3>{plan.name}</h3>
-                  <div className="price">{plan.price}<span>{plan.per}</span></div>
+                  <div className="tier-price-box">
+                    <span className="tier-currency">$</span>
+                    <span className="tier-amount">{plan.price.replace('$', '')}</span>
+                    <span className="tier-per">{plan.per}</span>
+                  </div>
                 </div>
-                <ul className="plan-features">
+
+                <ul className="tier-features-list">
                   {plan.features.map(f => (
                     <li key={f}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                      {f}
+                      <div className="tier-check"><Check size={14} /></div>
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
-                <Link to="/contact" className={`btn ${plan.featured ? 'btn-primary' : 'btn-secondary'}`}>
-                  {plan.name === 'Enterprise' ? 'Get Quote' : 'Select Plan'}
+
+                <Link to="/contact" className={`tier-cta-btn ${plan.featured ? 'primary' : 'secondary'}`} style={{ textDecoration: 'none', textAlign: 'center', display: 'block' }}>
+                  {plan.name === 'Enterprise' ? 'Initiate Consultation' : 'Deploy This Plan'}
                 </Link>
               </div>
             ))}

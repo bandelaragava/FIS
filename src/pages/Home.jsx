@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Users, Zap, Lock, Headphones, Maximize, Code, Smartphone,
   Cloud, Brain, Briefcase, ArrowRight, Search, PenTool,
-  Monitor, Play, Activity, MapPin, Mail, Phone, ChevronDown, Check, CheckCircle, GraduationCap, ShoppingCart, Crosshair, BarChart, Layout, Mouse
+  Monitor, Play, Activity, MapPin, Mail, Phone, ChevronDown, Check, CheckCircle, GraduationCap, ShoppingCart, Crosshair, BarChart, Layout, Mouse, Shield
 } from 'lucide-react';
 
 function useReveal() {
@@ -704,63 +704,135 @@ export default function Home() {
       {/* 3.3 Problem -> Solution Section */}
       <InteractiveBridgingGap />
 
-      {/* 3.4 Services Section */}
-      <section id="services" className="section-padding services-section">
+      {/* 3.4 Services — Premier Service Nexus Redesign */}
+      <section id="services" className="section-padding services-nexus">
         <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">What We Do</span>
-            <h2>Our Core <span className="gradient-text">Services</span></h2>
+          <div className="section-header reveal">
+            <div className="flex-header">
+              <div className="header-left">
+                <span className="sub-heading">Expertise Portfolio</span>
+                <h2 className="font-giant">Our <span className="gradient-text">Service Nexus</span></h2>
+              </div>
+              <div className="header-right">
+                <p className="text-secondary" style={{ maxWidth: '400px' }}>
+                  We engineer high-stake technical solutions that bridge the gap between 
+                  ambitious vision and digital reality.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="services-grid">
+          
+          <div className="nexus-grid">
             {[
-              { num: '01', badge: 'Popular', icon: <Code />, title: 'Web Development', desc: 'Custom, high-performance web applications built with modern frameworks and robust backend architectures.', color: 'purple' },
-              { num: '02', badge: 'Enterprise', icon: <Smartphone />, title: 'Mobile Apps', desc: 'Native and cross-platform mobile experiences that offer seamless performance across all devices.', color: 'blue' },
-              { num: '03', badge: 'Secure', icon: <Cloud />, title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure, advanced migrations, and state-of-the-art DevOps automation for reliability.', color: 'cyan' },
-              { num: '04', badge: 'Smart', icon: <Brain />, title: 'AI Solutions', desc: 'Harness the power of intelligent algorithms and neural networks to drive business automation and insight.', color: 'magenta' },
-              { num: '05', badge: 'Strategy', icon: <Briefcase />, title: 'IT Consulting', desc: 'Expert technology advisory services to map out your long-term digital transformation and growth strategy.', color: 'orange' },
+              { 
+                num: '01', 
+                status: 'HIGH PERFORMANCE', 
+                icon: <Code />, 
+                title: 'Web Engineering', 
+                desc: 'Hyper-responsive web platforms built with React and cutting-edge backends for sub-second latency.', 
+                color: '#7000ff' 
+              },
+              { 
+                num: '02', 
+                status: 'CROSS PLATFORM', 
+                icon: <Smartphone />, 
+                title: 'Mobile Ecosystems', 
+                desc: 'Native-feel iOS and Android applications engineered for maximum user retention and engagement.', 
+                color: '#00f2ff' 
+              },
+              { 
+                num: '03', 
+                status: 'CLOUD NATIVE', 
+                icon: <Cloud />, 
+                title: 'Infra Automation', 
+                desc: 'Scalable, self-healing cloud architectures powered by AWS and automated CI/CD pipelines.', 
+                color: '#00ff88' 
+              },
+              { 
+                num: '04', 
+                status: 'NEURAL LOGIC', 
+                icon: <Brain />, 
+                title: 'AI Architectures', 
+                desc: 'Deploying custom LLMs and predictive models to automate complex decision-making processes.', 
+                color: '#ff00ff' 
+              },
+              { 
+                num: '05', 
+                status: 'STRATEGIC SYNC', 
+                icon: <Briefcase />, 
+                title: 'Digital Strategy', 
+                desc: 'Expert-led consulting to roadmap your global digital transformation and market expansion.', 
+                color: '#ffa500' 
+              },
             ].map((s, i) => (
-              <div className="glass-card reveal" key={i}>
-                <span className="service-card-num">{s.num}</span>
-                <div>
-                  <div className="service-badge">{s.badge}</div>
-                  <div className={`service-icon ${s.color}`}>{s.icon}</div>
-                  <h3 className="mb-2 font-large">{s.title}</h3>
-                  <p className="text-secondary mb-3 font-normal">{s.desc}</p>
+              <div className="nexus-card reveal" key={i} style={{ '--nexus-color': s.color }}>
+                <div className="nexus-card-inner">
+                  <div className="nexus-header">
+                    <span className="nexus-num">{s.num}</span>
+                    <div className="nexus-status-pill">
+                       <span className="pulse-dot" />
+                       {s.status}
+                    </div>
+                  </div>
+                  
+                  <div className="nexus-icon-box">
+                    <div className="nexus-icon-glow" />
+                    <div className="nexus-icon-svg">{s.icon}</div>
+                  </div>
+
+                  <h3 className="nexus-title">{s.title}</h3>
+                  <p className="nexus-desc">{s.desc}</p>
+                  
+                  <Link to="/services" className="nexus-link">
+                    <span>Analyze Scope</span>
+                    <ArrowRight size={18} />
+                  </Link>
+
+                  {/* Decorative background glass shard */}
+                  <div className="nexus-shard" />
                 </div>
-                <Link to="/services" className="details-link">
-                  Explore Now <ArrowRight size={18} />
-                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3.5 Process Section */}
-      <section className="section-padding">
+      {/* 3.5 Process Section — Digital Journey Redesign */}
+      <section className="section-padding process-section-alt">
         <div className="container">
           <div className="section-header center reveal">
             <span className="sub-heading">How We Work</span>
-            <h2>Our Proven <span className="gradient-text">Process</span></h2>
+            <h2>Our High-Octane <span className="gradient-text">Process</span></h2>
+            <p className="text-secondary mt-3" style={{ maxWidth: '700px', margin: '0 auto' }}>
+              From initial blueprint to final launch, our workflow is engineered for precision,
+              scalability, and unbreakable quality.
+            </p>
           </div>
-          <div className="process-container">
-            {/* Connecting line */}
-            <div className="process-connector"></div>
+          
+          <div className="process-container-alt">
             {[
-              { step: 'PROJECT SCOPE', title: 'Requirement Analysis', icon: <Search /> },
-              { step: 'VISUAL DESIGN', title: 'Design & UI/UX', icon: <PenTool /> },
-              { step: 'AGILE BUILD', title: 'Development', icon: <Monitor /> },
-              { step: 'QA & AUDIT', title: 'Testing', icon: <Activity /> },
-              { step: 'LIVE LAUNCH', title: 'Deployment', icon: <Play /> },
+              { step: '01', title: 'Discovery', icon: <Search />, desc: 'Market Research & Scoping' },
+              { step: '02', title: 'Visuals', icon: <PenTool />, desc: 'UI/UX & Prototyping' },
+              { step: '03', title: 'Build', icon: <Monitor />, desc: 'Full-Stack Development' },
+              { step: '04', title: 'Logic', icon: <Activity />, desc: 'QA & Stress Testing' },
+              { step: '05', title: 'Launch', icon: <Play />, desc: 'CI/CD & Deployment' },
             ].map((p, i) => (
-              <div className="process-step-item reveal" key={i}>
-                <span className="process-step-num">{p.step}</span>
-                <div className="process-icon-outer">
-                  {p.icon}
+              <div className="process-step-premium reveal" key={i}>
+                <div className="step-accent-line" />
+                <div className="process-icon-box">
+                   <div className="icon-inner">{p.icon}</div>
+                   <div className="step-glow" />
                 </div>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 700 }}>{p.title}</h4>
+                <div className="step-content">
+                  <span className="step-number-alt">{p.step}</span>
+                  <h4>{p.title}</h4>
+                  <p className="small-desc">{p.desc}</p>
+                </div>
               </div>
             ))}
+            
+            {/* Dynamic flow line connector */}
+            <div className="dynamic-path-connector" />
           </div>
         </div>
       </section>
@@ -771,204 +843,335 @@ export default function Home() {
       {/* 3.7 Portfolio Section — Premium Redesign */}
       <FeaturedPortfolio />
 
-      {/* 3.8 Technologies Section */}
-      <section className="tech-stack section-padding services-section">
-        <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Technology</span>
-            <h2>Our <span className="gradient-text">Modern Tech Stack</span></h2>
-          </div>
-        </div>
-        <div className="tech-marquee py-2" style={{ padding: '2rem 0' }}>
-          <div className="marquee-content">
-            {[...techItems, ...techItems, ...techItems].map((t, i) => (
-              <div className="tech-tag" key={i}>{t}</div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3.9 Industries Section */}
-      <section className="section-padding">
-        <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Where We Excel</span>
-            <h2>Industries We <span className="gradient-text">Serve</span></h2>
-          </div>
-          <div className="ind-grid">
+      {/* 3.8 Technologies Section — Tech Orion Redesign */}
+      <section className="tech-orion section-padding">
+        <div className="container center reveal">
+          <span className="sub-heading">Infinite Stack</span>
+          <h2>The <span className="gradient-text">Tech Orion</span></h2>
+          <p className="text-secondary mt-3 mb-5" style={{ maxWidth: '600px', margin: '0 auto' }}>
+            We leverage a hand-picked ecosystem of high-performance technologies to engineer 
+            solutions that outperform and outscale.
+          </p>
+          
+          <div className="orion-nebula">
             {[
-              { icon: <Crosshair />, title: 'Healthcare' },
-              { icon: <BarChart />, title: 'Fintech' },
-              { icon: <ShoppingCart />, title: 'E-commerce' },
-              { icon: <GraduationCap />, title: 'EdTech' },
-            ].map((ind, i) => (
-              <div className="glass-card center reveal py-large" key={i}>
-                <div className="ind-card-icon">
-                  {React.cloneElement(ind.icon, { size: 32 })}
+              { name: 'React', level: 'Core', color: '#00f2ff' },
+              { name: 'Next.js', level: 'Edge', color: '#fff' },
+              { name: 'TypeScript', level: 'Logic', color: '#0070ff' },
+              { name: 'Node.js', level: 'Runtime', color: '#00ff88' },
+              { name: 'Python', level: 'A.I.', color: '#ffa500' },
+              { name: 'Docker', level: 'Infra', color: '#00f2ff' },
+              { name: 'AWS', level: 'Cloud', color: '#ffa500' },
+              { name: 'PostgreSQL', level: 'Data', color: '#7000ff' },
+              { name: 'Figma', level: 'UX/UI', color: '#ff00ff' },
+              { name: 'Kubernetes', level: 'Orch.', color: '#0070ff' },
+            ].map((tech, i) => (
+              <div 
+                className="orion-node reveal" 
+                key={i} 
+                style={{ 
+                  '--node-color': tech.color, 
+                  '--node-delay': `${i * 0.15}s`,
+                  animationDuration: `${3 + i}s`
+                }}
+              >
+                <div className="node-content">
+                  <span className="node-level">{tech.level}</span>
+                  <div className="node-dot" />
+                  <span className="node-name">{tech.name}</span>
                 </div>
-                <h3>{ind.title}</h3>
+                <div className="node-connector" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3.10 Why Choose Us */}
-      <section className="features section-padding services-section">
+      {/* 3.9 Industries — Strategic Domain Cluster Redesign */}
+      <section className="section-padding industries-premium">
         <div className="container">
           <div className="section-header center reveal">
-            <span className="sub-heading">Why Choose Us</span>
-            <h2>Built for <span className="gradient-text">Excellence</span></h2>
+            <span className="sub-heading">Strategic Domains</span>
+            <h2>Industries We <span className="gradient-text">Elevate</span></h2>
+            <p className="text-secondary mt-3" style={{ maxWidth: '600px', margin: '0 auto' }}>
+              We deploy specialized engineering squads tailored to the unique complexities of 
+              your specific industry landscape.
+            </p>
           </div>
-          <div className="features-grid" style={{ marginTop: '4rem' }}>
+          
+          <div className="domain-cluster-grid">
             {[
-              { icon: <Users size={40} />, title: 'Expert Team', desc: 'Highly skilled professionals with years of industry experience.' },
-              { icon: <Zap size={40} />, title: 'Fast Delivery', desc: 'Efficient workflows ensuring timely project completion.' },
-              { icon: <Lock size={40} />, title: 'Secure Systems', desc: 'Robust security protocols to protect your digital assets.' },
-              { icon: <Headphones size={40} />, title: '24/7 Support', desc: 'Dedicated assistance whenever you need it most.' },
+              { icon: <Crosshair size={32}/>, title: 'Healthcare', metric: 'HIPAA Sync', color: '#ff4b4b' },
+              { icon: <BarChart size={32}/>, title: 'Fintech', metric: '99.9% Uptime', color: '#00f2ff' },
+              { icon: <ShoppingCart size={32}/>, title: 'E-commerce', metric: '2M+ Daily Tx', color: '#ff00ff' },
+              { icon: <GraduationCap size={32}/>, title: 'EdTech', metric: 'Global Scale', color: '#ffa500' },
+            ].map((domain, i) => (
+              <div 
+                className="domain-card-premium reveal" 
+                key={i}
+                style={{ '--domain-color': domain.color, '--reveal-delay': `${i * 0.1}s` }}
+              >
+                <div className="domain-card-inner">
+                  <div className="domain-icon-aura">
+                    {domain.icon}
+                  </div>
+                  <h3>{domain.title}</h3>
+                  <div className="domain-metric-badge">
+                     <div className="pulse-dot" />
+                     <span>{domain.metric}</span>
+                  </div>
+                  
+                  {/* Decorative 3D elements */}
+                  <div className="domain-card-glass-layer" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3.10 Why Choose Us — Reverted to Features Grid Styling */}
+      <section className="features-premium section-padding">
+        <div className="container">
+          <div className="section-header center reveal">
+            <span className="sub-heading">The FIS Advantage</span>
+            <h2 className="font-giant">Built for <span className="gradient-text">Excellence</span></h2>
+            <p className="text-secondary mt-3" style={{ maxWidth: '700px', margin: '0 auto' }}>
+              We don't just deliver projects; we engineer digital legacies. Our approach combines 
+              artistic precision with technical mastery to solve your most complex challenges.
+            </p>
+          </div>
+
+          <div className="features-premium-grid">
+            {[
+              { 
+                icon: <Users size={32} />, 
+                title: 'Elite Engineering', 
+                desc: 'A hand-picked team of senior architects and full-stack wizards dedicated to your vision.',
+                color: 'var(--accent-purple)',
+                delay: '0.1s'
+              },
+              { 
+                icon: <Zap size={32} />, 
+                title: 'Velocity First', 
+                desc: 'Agile methodologies that prioritize speed without ever sacrificing code integrity.',
+                color: 'var(--accent-cyan)',
+                delay: '0.2s'
+              },
+              { 
+                icon: <Shield size={32} />, 
+                title: 'Fortress Security', 
+                desc: 'Enterprise-grade encryption and zero-trust protocols baked into the core architecture.',
+                color: '#ff00ff',
+                delay: '0.3s'
+              },
+              { 
+                icon: <Headphones size={32} />, 
+                title: 'Sync Support', 
+                desc: 'Global assistance that speaks your language and operates in your timezone, 24/7.',
+                color: '#ffa500',
+                delay: '0.4s'
+              },
+              { 
+                icon: <Activity size={32} />, 
+                title: 'Performance DNA', 
+                desc: 'Optimization is not an afterthought. We build for sub-second latency and infinite scale.',
+                color: '#00ff88',
+                delay: '0.5s'
+              },
             ].map((f, i) => (
-              <div className="feature-item glass-card reveal" key={i}>
-                <div className="feature-icon">{f.icon}</div>
-                <h4>{f.title}</h4>
+              <div 
+                className="feature-card-premium reveal" 
+                key={i}
+                style={{ '--f-color': f.color, '--reveal-delay': f.delay }}
+              >
+                <div className="feature-icon-wrapper">
+                  <div className="feature-icon-glow" />
+                  {f.icon}
+                </div>
+                <h3>{f.title}</h3>
                 <p>{f.desc}</p>
+                <div className="feature-card-accent" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3.11 Results / Achievements */}
-      <section className="section-padding">
+      {/* 3.11 Results — Live Meta-Stats Hub Redesign */}
+      <section className="section-padding stats-premium">
         <div className="container">
-          <div className="glass-card center reveal stats-banner-card">
-            <div className="stats-banner-grid">
-              <div>
-                <span className="stat-number-giant">200+</span>
-                <span className="stat-label-large">Projects Delivered</span>
-              </div>
-              <div>
-                <span className="stat-number-giant">150+</span>
-                <span className="stat-label-large">Global Clients</span>
-              </div>
-              <div>
-                <span className="stat-number-giant">99%</span>
-                <span className="stat-label-large">SLA Success Rate</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3.12 Testimonials */}
-      <section className="section-padding services-section">
-        <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Client Feedback</span>
-            <h2>What They <span className="gradient-text">Say</span></h2>
-          </div>
-          <div className="testimonials-grid">
-            <div className="testimonial-card glass-card reveal">
-              <div className="quote-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
-              </div>
-              <p>"The team delivered an outstanding platform that exceeded all our expectations. Their technical depth in cloud-native scaling is truly world-class."</p>
-              <div className="client-info">
-                <div className="client-avatar">SJ</div>
-                <div>
-                  <div className="client-name">Sarah Jenkins</div>
-                  <div className="client-role">CTO, TechCorp</div>
+          <div className="stats-meta-hub reveal">
+            {[
+              { val: '240+', label: 'Digital Products', sub: 'Engineered & Launched' },
+              { val: '180+', label: 'Global Clients', sub: 'Inc. 40 Fortune 500s' },
+              { val: '99.8%', label: 'Infrastructure uptime', sub: 'AWS & Azure cloud sync' },
+            ].map((stat, i) => (
+              <div className="meta-stat-block" key={i}>
+                <div className="meta-stat-v-wrap">
+                  <span className="meta-stat-value count-up">{stat.val}</span>
+                  <div className="meta-stat-progress">
+                    <div className="progress-fill" style={{ width: '100%', animationDelay: `${i * 0.2}s` }} />
+                  </div>
+                </div>
+                <div className="meta-stat-content">
+                  <h4>{stat.label}</h4>
+                  <p>{stat.sub}</p>
                 </div>
               </div>
-            </div>
-            <div className="testimonial-card glass-card reveal">
-              <div className="quote-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
-              </div>
-              <p>"Execution was flawless. They understood our complex requirements and handled the HIPAA-compliance for our mobile ecosystem perfectly."</p>
-              <div className="client-info">
-                <div className="client-avatar">MC</div>
-                <div>
-                  <div className="client-name">Michael Chang</div>
-                  <div className="client-role">Founder, MedConnect</div>
+            ))}
+            
+            {/* Visual background sync wave */}
+            <div className="stats-wave-overlay" />
+          </div>
+        </div>
+      </section>
+
+      {/* 3.12 Testimonials — Global Voices Redesign */}
+      <section className="section-padding testimonials-premium">
+        <div className="container">
+          <div className="section-header center reveal">
+            <span className="sub-heading">Global Impact</span>
+            <h2>Client <span className="gradient-text">Voices</span></h2>
+          </div>
+          
+          <div className="testimonials-stack">
+            {[
+              {
+                quote: "The team delivered an outstanding platform that exceeded all our expectations. Their technical depth in cloud-native scaling is truly world-class.",
+                name: "Sarah Jenkins",
+                role: "CTO, TechCorp",
+                avatar: "SJ",
+                color: "var(--accent-purple)"
+              },
+              {
+                quote: "Execution was flawless. They understood our complex requirements and handled the HIPAA-compliance for our mobile ecosystem perfectly.",
+                name: "Michael Chang",
+                role: "Founder, MedConnect",
+                avatar: "MC",
+                color: "var(--accent-cyan)"
+              },
+              {
+                quote: "A transformative partnership. Their AI-driven approach reduced our operational overhead by 40% within the first quarter.",
+                name: "Elena Rodriguez",
+                role: "VP Eng, InnovateInc",
+                avatar: "ER",
+                color: "#ff00ff"
+              }
+            ].map((t, i) => (
+              <div 
+                className="testimonial-portal reveal" 
+                key={i}
+                style={{ '--accent-color': t.color, '--reveal-delay': `${i * 0.1}s` }}
+              >
+                <div className="portal-quote-mark">"</div>
+                <p className="testimonial-text">{t.quote}</p>
+                <div className="portal-client-footer">
+                  <div className="portal-avatar" style={{ background: t.color }}>{t.avatar}</div>
+                  <div className="portal-client-meta">
+                    <div className="portal-client-name">{t.name}</div>
+                    <div className="portal-client-role">{t.role}</div>
+                  </div>
                 </div>
+                <div className="portal-glow-light" />
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3.13 Pricing Section */}
-      <section className="section-padding">
+      {/* 3.13 Pricing — Investment Architecture Redesign */}
+      <section className="section-padding pricing-premium">
         <div className="container">
           <div className="section-header center reveal">
-            <span className="sub-heading">Transparent Cost</span>
-            <h2>Flexible <span className="gradient-text">Pricing Plans</span></h2>
+            <span className="sub-heading">Transparent Investment</span>
+            <h2>Select Your <span className="gradient-text">Success Tier</span></h2>
           </div>
-          <div className="pricing-grid" style={{ marginTop: '4rem' }}>
-            <div className="plan-card glass-card reveal">
-              <div className="plan-header">
-                <h3>Basic</h3>
-                <div className="price">$999<span>/project start</span></div>
+          
+          <div className="pricing-premium-grid">
+            {[
+              { 
+                name: 'Essential', 
+                price: '$1,999', 
+                per: '/start', 
+                features: ['UI/UX Blueprint', 'Core Web Platform', 'Standard Security', '30 Days Support'],
+                featured: false,
+                color: 'var(--text-muted)'
+              },
+              { 
+                name: 'Professional', 
+                price: '$4,999', 
+                per: '/start', 
+                features: ['Premium Custom Design', 'Full-Stack Ecosystem', 'API & Third-Party Sync', '180 Days Priority Support'],
+                featured: true,
+                color: 'var(--accent-cyan)'
+              },
+              { 
+                name: 'Enterprise', 
+                price: 'Custom', 
+                per: '/quote', 
+                features: ['Complex Architectures', 'Cloud Native & DevOps', 'Specialized AI Models', '24/7 Dedicated Squad'],
+                featured: false,
+                color: 'var(--accent-purple)'
+              },
+            ].map((plan, i) => (
+              <div className={`tier-card-premium reveal ${plan.featured ? 'featured' : ''}`} key={i}>
+                {plan.featured && <div className="tier-popular-tag">Most Optimized</div>}
+                
+                <div className="tier-header">
+                  <h3>{plan.name}</h3>
+                  <div className="tier-price-box">
+                    <span className="tier-currency">$</span>
+                    <span className="tier-amount">{plan.price.replace('$', '')}</span>
+                    <span className="tier-per">{plan.per}</span>
+                  </div>
+                </div>
+
+                <ul className="tier-features-list">
+                  {plan.features.map(f => (
+                    <li key={f}>
+                      <div className="tier-check"><Check size={14} /></div>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button className={`tier-cta-btn ${plan.featured ? 'primary' : 'secondary'}`}>
+                  {plan.name === 'Enterprise' ? 'Initiate Consultation' : 'Select This Tier'}
+                </button>
+                
+                <div className="tier-card-bg-gradient" style={{ background: plan.featured ? 'radial-gradient(circle at 100% 0%, rgba(0, 242, 255, 0.15), transparent 70%)' : '' }} />
               </div>
-              <ul className="plan-features">
-                <li><CheckCircle size={18} /> Basic UI/UX Design</li>
-                <li><CheckCircle size={18} /> Simple Web App</li>
-                <li><CheckCircle size={18} /> 1 Month Support</li>
-              </ul>
-              <button className="btn btn-secondary" style={{ width: '100%' }}>Choose Plan</button>
-            </div>
-            <div className="plan-card glass-card featured reveal">
-              <div className="popular-badge">Most Popular</div>
-              <div className="plan-header">
-                <h3>Professional</h3>
-                <div className="price">$3,499<span>/project start</span></div>
-              </div>
-              <ul className="plan-features">
-                <li><CheckCircle size={18} /> Premium Custom Design</li>
-                <li><CheckCircle size={18} /> Full-Stack Development</li>
-                <li><CheckCircle size={18} /> API Integrations</li>
-                <li><CheckCircle size={18} /> 6 Months Support</li>
-              </ul>
-              <button className="btn btn-primary" style={{ width: '100%' }}>Choose Plan</button>
-            </div>
-            <div className="plan-card glass-card reveal">
-              <div className="plan-header">
-                <h3>Enterprise</h3>
-                <div className="price">Custom<span>Pricing</span></div>
-              </div>
-              <ul className="plan-features">
-                <li><CheckCircle size={18} /> Complex Architectures</li>
-                <li><CheckCircle size={18} /> Cloud Native & DevOps</li>
-                <li><CheckCircle size={18} /> AI/ML Solutions</li>
-                <li><CheckCircle size={18} /> 24/7 Dedicated Support</li>
-              </ul>
-              <button className="btn btn-secondary" style={{ width: '100%' }}>Contact Us</button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3.14 FAQ Section */}
-      <section className="section-padding services-section">
+      {/* 3.14 FAQ Section — Knowledge Grid Redesign */}
+      <section className="section-padding faq-premium">
         <div className="container">
           <div className="section-header center reveal">
-            <span className="sub-heading">Got Questions?</span>
-            <h2>Frequently Asked <span className="gradient-text">Questions</span></h2>
+            <span className="sub-heading">Intelligence Hub</span>
+            <h2>System <span className="gradient-text">F.A.Q.</span></h2>
           </div>
-          <div className="faq-accordion reveal" style={{ marginTop: '4rem' }}>
+          <div className="faq-knowledge-grid reveal" style={{ marginTop: '5rem' }}>
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className={`faq-item glass-card ${openFaq === i ? 'open' : ''}`}
+                className={`faq-tile ${openFaq === i ? 'open' : ''}`}
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                style={{ marginBottom: '1rem' }}
               >
-                <div className="faq-question">
+                <div className="faq-tile-header">
                   <h3>{faq.q}</h3>
-                  <ChevronDown />
+                  <div className="faq-status-indicator">
+                     <span className="status-label">{openFaq === i ? 'DECRYPTED' : 'LOCKED'}</span>
+                     <ChevronDown size={18} className="faq-icon" />
+                  </div>
                 </div>
-                <div className="faq-answer">
-                  <p style={{ color: 'var(--text-secondary)' }}>{faq.a}</p>
+                <div className="faq-tile-content">
+                  <div className="content-inner">
+                    <p>{faq.a}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -976,98 +1179,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3.15 Blog Section */}
-      <section className="section-padding">
+      {/* 3.17 Contact — The Mission Launchpad Redesign */}
+      <section id="contact" className="section-padding contact-premium">
         <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Latest Insights</span>
-            <h2>Our <span className="gradient-text">Blog & News</span></h2>
-          </div>
-          <div className="blog-grid" style={{ marginTop: '4rem' }}>
-            <div className="glass-card reveal">
-              <div className="blog-date">March 15, 2026</div>
-              <h3 className="font-medium mb-2">The Future of AI in Enterprise Tech</h3>
-              <p className="text-secondary">Discover how artificial intelligence is shaping the landscape of modern enterprise software architecture...</p>
-              <Link to="/blog" className="detail-link-accent">Read Article &rarr;</Link>
-            </div>
-            <div className="glass-card reveal">
-              <div className="blog-date">March 10, 2026</div>
-              <h3 className="font-medium mb-2">Why Migrate to Next.js Now?</h3>
-              <p className="text-secondary">Performance, SEO, and developer experience. Learn why top companies are rewriting their frontends...</p>
-              <Link to="/blog" className="detail-link-accent">Read Article &rarr;</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3.16 Lead Magnet Section */}
-      <section className="section-padding services-section">
-        <div className="container center glass-card reveal audit-card">
-          <h2 className="mb-2" style={{ fontSize: '2.5rem' }}>Get Your <span className="gradient-text">Free Tech Audit</span></h2>
-          <p className="text-secondary font-normal mb-4" style={{ maxWidth: '600px', margin: '0 auto' }}>
-            Unsure if your infrastructure is scalable? Let our experts analyze your architecture and provide a free, comprehensive report.
-          </p>
-          <div className="audit-form">
-            <input type="email" placeholder="Enter your business email" className="input-pill-dark" />
-            <button className="btn btn-primary">Claim Audit</button>
-          </div>
-        </div>
-      </section>
-
-      {/* 3.17 Contact Section */}
-      <section id="contact" className="section-padding">
-        <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Get In Touch</span>
-            <h2>Let's Discuss <span className="gradient-text">Your Project</span></h2>
-          </div>
-          <div className="mt-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
-            <div className="reveal">
-              <h3 className="font-large mb-4">Contact Information</h3>
-              <div className="contact-info-list">
-                <div className="contact-info-block">
-                  <div style={{ color: 'var(--accent-cyan)' }}><Mail size={24} /></div>
+          <div className="contact-portal-grid">
+            <div className="contact-info-portal reveal">
+              <span className="sub-heading">Protocol 01</span>
+              <h2 className="font-giant">Initiate <br/><span className="gradient-text">Discovery</span></h2>
+              <p className="text-secondary mt-3 mb-5" style={{ maxWidth: '450px' }}>
+                Secure a high-bandwidth consultation with our lead architects to map your project's 
+                technical trajectory.
+              </p>
+              
+              <div className="portal-info-list">
+                <div className="p-info-item">
+                  <div className="p-info-icon"><Mail size={20} /></div>
                   <div>
-                    <h4 style={{ marginBottom: '0.3rem' }}>Email</h4>
-                    <p style={{ color: 'var(--text-secondary)' }}>hello@futureinvo.com</p>
+                    <label>Transmission</label>
+                    <p>hello@futureinvo.com</p>
                   </div>
                 </div>
-                <div className="contact-info-block">
-                  <div style={{ color: 'var(--accent-cyan)' }}><Phone size={24} /></div>
+                <div className="p-info-item">
+                  <div className="p-info-icon"><Phone size={20} /></div>
                   <div>
-                    <h4 style={{ marginBottom: '0.3rem' }}>Phone</h4>
-                    <p style={{ color: 'var(--text-secondary)' }}>+1 (555) 123-4567</p>
+                    <label>Direct Sync</label>
+                    <p>+1 (555) 123-4567</p>
                   </div>
                 </div>
-                <div className="contact-info-block">
-                  <div style={{ color: 'var(--accent-cyan)' }}><MapPin size={24} /></div>
+                <div className="p-info-item">
+                  <div className="p-info-icon"><MapPin size={20} /></div>
                   <div>
-                    <h4 style={{ marginBottom: '0.3rem' }}>Address</h4>
-                    <p style={{ color: 'var(--text-secondary)' }}>123 Tech Boulevard<br />Silicon Valley, CA 94025</p>
+                    <label>HQ Coordinates</label>
+                    <p>Silicon Valley, CA 94025</p>
                   </div>
                 </div>
               </div>
-              <div className="map-view-box">
-                {/* Map Placeholder */}
-                <span className="text-muted">Interactive Map View</span>
-              </div>
             </div>
-            <div className="glass-card reveal">
-              <form className="contact-form-dark">
-                <div className="form-field-wrap">
-                  <label>Full Name</label>
-                  <input type="text" className="input-dark-rounded" placeholder="John Doe" />
-                </div>
-                <div className="form-field-wrap">
-                  <label>Email</label>
-                  <input type="email" className="input-dark-rounded" placeholder="john@company.com" />
-                </div>
-                <div className="form-field-wrap">
-                  <label>Message</label>
-                  <textarea rows="5" className="input-dark-rounded no-resize" placeholder="Tell us about your project..."></textarea>
-                </div>
-                <button type="button" className="btn btn-primary mt-2">Send Message</button>
-              </form>
+
+            <div className="contact-form-portal reveal">
+              <div className="form-glow-box">
+                <form className="mission-form">
+                  <div className="form-row">
+                    <div className="input-group-premium">
+                      <label>Commander Name</label>
+                      <input type="text" placeholder="John Wick" required />
+                      <div className="input-focus-line" />
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="input-group-premium">
+                      <label>Secure Email</label>
+                      <input type="email" placeholder="john@continental.com" required />
+                      <div className="input-focus-line" />
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="input-group-premium">
+                      <label>Mission Objectives</label>
+                      <textarea rows="4" placeholder="Brief us on your objectives..." required></textarea>
+                      <div className="input-focus-line" />
+                    </div>
+                  </div>
+                  <button type="submit" className="mission-launch-btn">
+                     <span>Launch Discovery</span>
+                     <ArrowRight size={20} />
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

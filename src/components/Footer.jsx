@@ -1,51 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Linkedin, Github } from 'lucide-react';
+import { Twitter, Linkedin, Github, Activity, Globe, ShieldCheck } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container footer-grid">
-        <div className="footer-brand">
-          <Link to="/" className="logo">
-            <span className="logo-accent">Future</span>-Invo
+    <footer className="footer-premium">
+      <div className="container footer-portal-grid">
+        <div className="footer-v-section brand-hub">
+          <Link to="/" className="footer-logo">
+            <span className="logo-pulse" />
+            <span className="logo-txt">Future-Invo <span className="gradient-text">IT</span></span>
           </Link>
-          <p>Transforming complex ideas into digital realities with cutting-edge IT solutions.</p>
+          <p className="brand-mission">
+            Architecting the digital frontier through high-bandwidth engineering 
+            and precision design.
+          </p>
+          <div className="system-vital">
+             <Activity size={14} className="vital-pulse" />
+             <span>SYSTEM STATUS: OPERATIONAL</span>
+          </div>
         </div>
 
-        <div className="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/services">Services</Link></li>
-            <li><Link to="/portfolio">Portfolio</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+        <div className="footer-v-section">
+          <h4 className="v-label">Navigation</h4>
+          <ul className="v-links">
+            <li><Link to="/about">Organization</Link></li>
+            <li><Link to="/services">Ecosystem</Link></li>
+            <li><Link to="/portfolio">Benchmarks</Link></li>
+            <li><Link to="/contact">Protocol</Link></li>
           </ul>
         </div>
 
-        <div className="footer-links">
-          <h4>Services</h4>
-          <ul>
-            <li><Link to="/services">Web Dev</Link></li>
-            <li><Link to="/services">Mobile Apps</Link></li>
-            <li><Link to="/services">Cloud</Link></li>
-            <li><Link to="/services">AI Solutions</Link></li>
+        <div className="footer-v-section">
+          <h4 className="v-label">Solutions</h4>
+          <ul className="v-links">
+            <li><Link to="/services">Web Engineering</Link></li>
+            <li><Link to="/services">Neural Logic</Link></li>
+            <li><Link to="/services">Cloud Native</Link></li>
+            <li><Link to="/services">Cyber Defense</Link></li>
           </ul>
         </div>
 
-        <div className="footer-social">
-          <h4>Follow Us</h4>
-          <div className="social-icons">
-            <a href="#" aria-label="Twitter"><Twitter /></a>
-            <a href="#" aria-label="LinkedIn"><Linkedin /></a>
-            <a href="#" aria-label="GitHub"><Github /></a>
+        <div className="footer-v-section social-matrix">
+          <h4 className="v-label">Global Nodes</h4>
+          <div className="social-node-list">
+            <a href="#" className="social-node-item" aria-label="Twitter">
+              <Twitter size={20} />
+            </a>
+            <a href="#" className="social-node-item" aria-label="LinkedIn">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" className="social-node-item" aria-label="GitHub">
+              <Github size={20} />
+            </a>
+          </div>
+          <div className="region-badge">
+             <Globe size={14} />
+             <span>GLOBAL PRESENCE</span>
           </div>
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <div className="container">
-          <p>&copy; 2026 Future-Invo IT Solutions. All rights reserved.</p>
+      <div className="footer-terminal-bottom">
+        <div className="container flex-between">
+          <p className="copyright-txt">&copy; 2026 Future-Invo. Secured by <span className="shield-txt"><ShieldCheck size={12} /> Quantum Guard</span></p>
+          <div className="terminal-meta">
+             <span>LOCAL: 127.0.0.1</span>
+             <span>BUILD: v4.2.0-STABLE</span>
+          </div>
         </div>
       </div>
     </footer>

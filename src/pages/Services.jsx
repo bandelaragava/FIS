@@ -140,7 +140,7 @@ export default function Services() {
             {services.map((s, i) => (
               <div 
                 key={i} 
-                id={s.title.toLowerCase().replace(/\s+/g, '-')}
+                id={s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
                 className="portal-card reveal" 
                 style={{ '--portal-color': s.color, '--reveal-delay': `${i * 0.05}s` }}
               >
@@ -168,7 +168,7 @@ export default function Services() {
                 </div>
 
                 <div className="portal-footer">
-                  <Link to="/contact" className="portal-action-btn">
+                  <Link to={`/services/${s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`} className="portal-action-btn">
                      <span>Initiate Protocol</span>
                      <ArrowRight size={16} />
                   </Link>

@@ -9,7 +9,7 @@ import Portfolio from './pages/Portfolio';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import ParticleBackground from './components/ParticleBackground';
-
+import ServiceDetail from './pages/ServiceDetail';
 export default function App() {
   return (
     <BrowserRouter>
@@ -21,6 +21,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />

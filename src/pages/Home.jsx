@@ -729,6 +729,7 @@ export default function Home() {
                 status: 'HIGH PERFORMANCE', 
                 icon: <Code />, 
                 title: 'Web Engineering', 
+                slug: 'web-engineering',
                 desc: 'Hyper-responsive web platforms built with React and cutting-edge backends for sub-second latency.', 
                 color: '#7000ff' 
               },
@@ -737,6 +738,7 @@ export default function Home() {
                 status: 'CROSS PLATFORM', 
                 icon: <Smartphone />, 
                 title: 'Mobile Ecosystems', 
+                slug: 'mobile-ecosystems',
                 desc: 'Native-feel iOS and Android applications engineered for maximum user retention and engagement.', 
                 color: '#00f2ff' 
               },
@@ -744,7 +746,8 @@ export default function Home() {
                 num: '03', 
                 status: 'CLOUD NATIVE', 
                 icon: <Cloud />, 
-                title: 'Infra Automation', 
+                title: 'Infra Automation',
+                slug: 'cloud-orchestration', 
                 desc: 'Scalable, self-healing cloud architectures powered by AWS and automated CI/CD pipelines.', 
                 color: '#00ff88' 
               },
@@ -752,7 +755,8 @@ export default function Home() {
                 num: '04', 
                 status: 'NEURAL LOGIC', 
                 icon: <Brain />, 
-                title: 'AI Architectures', 
+                title: 'AI Architectures',
+                slug: 'synthetic-intelligence', 
                 desc: 'Deploying custom LLMs and predictive models to automate complex decision-making processes.', 
                 color: '#ff00ff' 
               },
@@ -760,7 +764,8 @@ export default function Home() {
                 num: '05', 
                 status: 'STRATEGIC SYNC', 
                 icon: <Briefcase />, 
-                title: 'Digital Strategy', 
+                title: 'Digital Strategy',
+                slug: 'it-consulting', 
                 desc: 'Expert-led consulting to roadmap your global digital transformation and market expansion.', 
                 color: '#ffa500' 
               },
@@ -783,7 +788,7 @@ export default function Home() {
                   <h3 className="nexus-title">{s.title}</h3>
                   <p className="nexus-desc">{s.desc}</p>
                   
-                  <Link to="/services" className="nexus-link">
+                  <Link to={`/services/${s.slug}`} className="nexus-link">
                     <span>Analyze Scope</span>
                     <ArrowRight size={18} />
                   </Link>

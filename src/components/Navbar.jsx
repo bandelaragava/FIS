@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 const serviceList = [
-  'IT Consulting', 'Web Development', 'Web Design', 'Mobile Applications',
-  'Digital Marketing', 'Artificial Intelligence', 'Business Tools Development',
-  'Cloud Services', 'Cybersecurity solutions', 'Data science & big data', 'Emerging tech'
+  'IT Consulting', 'Web Engineering', 'UX/UI Architecture', 'Mobile Ecosystems',
+  'Performance Marketing', 'Synthetic Intelligence', 'Enterprise Software',
+  'Cloud Orchestration', 'Cybersecurity Guard', 'Data Intelligence', 'Emerging Frontiers',
+  'Full stack web & saas development', 'Machine learning & deep learning'
 ];
 
 const navItems = [
@@ -29,14 +31,15 @@ export default function Navbar() {
     <>
       <nav className="glass-header">
         <div className="container container-nav">
-          <Link to="/" className="logo" onClick={closeMobile}>
-            <span className="logo-accent">Future</span>-Invo
+          <Link to="/" className="logo" onClick={closeMobile} style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '-40px' }}>
+            <img src={logoImg} alt="Future-Invo Logo" style={{ height: '45px', objectFit: 'contain' }} />
+            <span><span className="logo-accent">Future</span>-Invo</span>
           </Link>
 
           <ul className="nav-links">
             {navItems.map((item) => (
-              <li 
-                key={item.path} 
+              <li
+                key={item.path}
                 className={item.hasDropdown ? 'nav-item-dropdown' : ''}
                 onMouseEnter={() => item.hasDropdown && setDropdownOpen(true)}
                 onMouseLeave={() => item.hasDropdown && setDropdownOpen(false)}
@@ -56,8 +59,8 @@ export default function Navbar() {
                   <ul className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
                     {serviceList.map((service) => (
                       <li key={service}>
-                        <Link 
-                          to={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`} 
+                        <Link
+                          to={`/services/${service.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
                           onClick={closeMobile}
                         >
                           {service}
@@ -97,7 +100,7 @@ export default function Navbar() {
                 {item.label}
               </NavLink>
               {item.hasDropdown && (
-                <button 
+                <button
                   className="mobile-dropdown-toggle"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
@@ -108,9 +111,9 @@ export default function Navbar() {
             {item.hasDropdown && dropdownOpen && (
               <div className="mobile-dropdown-list">
                 {serviceList.map((service) => (
-                  <Link 
-                    key={service} 
-                    to={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`}
+                  <Link
+                    key={service}
+                    to={`/services/${service.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
                     onClick={closeMobile}
                   >
                     {service}

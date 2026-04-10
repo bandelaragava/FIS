@@ -1,23 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Twitter, Linkedin, Github, Activity, Globe, ShieldCheck } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 export default function Footer() {
   return (
     <footer className="footer-premium">
       <div className="container footer-portal-grid">
         <div className="footer-v-section brand-hub">
-          <Link to="/" className="footer-logo">
-            <span className="logo-pulse" />
-            <span className="logo-txt">Future-Invo <span className="gradient-text">IT</span></span>
+          <Link to="/" className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: '-30px' }}>
+            <img src={logoImg} alt="Future-Invo Logo" style={{ height: '50px', objectFit: 'contain' }} />
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span className="logo-pulse" />
+              <span className="logo-txt">Future-Invo <span className="gradient-text">IT</span></span>
+            </span>
           </Link>
           <p className="brand-mission">
-            Architecting the digital frontier through high-bandwidth engineering 
+            Architecting the digital frontier through high-bandwidth engineering
             and precision design.
           </p>
           <div className="system-vital">
-             <Activity size={14} className="vital-pulse" />
-             <span>SYSTEM STATUS: OPERATIONAL</span>
+            <Activity size={14} className="vital-pulse" />
+            <span>SYSTEM STATUS: OPERATIONAL</span>
           </div>
         </div>
 
@@ -55,8 +59,8 @@ export default function Footer() {
             </a>
           </div>
           <div className="region-badge">
-             <Globe size={14} />
-             <span>GLOBAL PRESENCE</span>
+            <Globe size={14} />
+            <span>GLOBAL PRESENCE</span>
           </div>
         </div>
       </div>
@@ -65,8 +69,8 @@ export default function Footer() {
         <div className="container flex-between">
           <p className="copyright-txt">&copy; 2026 Future-Invo. Secured by <span className="shield-txt"><ShieldCheck size={12} /> Quantum Guard</span></p>
           <div className="terminal-meta">
-             <span>LOCAL: 127.0.0.1</span>
-             <span>BUILD: v4.2.0-STABLE</span>
+            <span>LOCAL: 127.0.0.1</span>
+            <span>BUILD: v4.2.0-STABLE</span>
           </div>
         </div>
       </div>

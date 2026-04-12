@@ -108,19 +108,7 @@ export default function Blog() {
         </div>
       </section>
 
-      <section className="section-padding center" style={{ paddingTop: 0 }}>
-        <div className="container glass-card" style={{ padding: '3rem', maxWidth: '600px' }}>
-          <h2 style={{ fontSize: '2rem' }}>Subscribe to Our <span className="gradient-text">Newsletter</span></h2>
-          <p style={{ color: 'var(--text-secondary)', marginTop: '1rem', marginBottom: '2rem' }}>Get the latest tech insights delivered straight to your inbox every week.</p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <input type="email" placeholder="Enter your email" style={{
-              flex: 1, padding: '14px 20px', borderRadius: '50px', border: '1px solid var(--border-glass)',
-              background: 'rgba(255,255,255,0.03)', color: '#fff', fontSize: '1rem',
-            }} />
-            <button className="btn btn-primary">Subscribe</button>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 }

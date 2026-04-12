@@ -94,9 +94,9 @@ export default function Contact() {
 
             <div className="contact-info-area">
               {[
-                { icon: <Mail size={24}/>, title: 'Email Us', value: 'hello@futureinvo.tech' },
-                { icon: <Phone size={24}/>, title: 'Call Us', value: '+1 (555) 123-4567' },
-                { icon: <MapPin size={24}/>, title: 'Visit Us', value: '123 Innovation Way, Tech City' },
+                { icon: <Mail size={24}/>, title: 'Email Us', value: 'info@futureinvo.com' },
+                { icon: <Phone size={24}/>, title: 'Call Us', value: '+91 73868 79818' },
+                { icon: <MapPin size={24}/>, title: 'Visit Us', value: 'Pathrika Nagar, Street No:1, HITEC City, Hyderabad – 500081' },
               ].map((item, i) => (
                 <div className="info-item" key={i}>
                   {item.icon}
@@ -107,9 +107,17 @@ export default function Contact() {
                 </div>
               ))}
 
-              <div className="map-placeholder glass-card">
-                <MapPin size={32} />
-                <span>123 Innovation Way, Tech City</span>
+              <div className="map-placeholder glass-card" style={{ padding: 0, overflow: 'hidden' }}>
+                <iframe 
+                  src="https://maps.google.com/maps?q=17.458629,78.374968&t=m&z=15&output=embed&iwloc=near"
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0, minHeight: '100%' }} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Future Invo Solutions Headquarters"
+                ></iframe>
               </div>
             </div>
           </div>

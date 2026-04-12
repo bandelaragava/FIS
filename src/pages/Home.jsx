@@ -185,7 +185,7 @@ function ScrollHero() {
               <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.045) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.045) * 50 * 20)}px)` }}>of </span>&nbsp;
               <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.06) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.06) * 50 * 20)}px)` }}>IT </span><br/>
               <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.075) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.075) * 50 * 20)}px)`, fontSize: '0.85em', color: 'var(--text-secondary)' }}>with </span>&nbsp;
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.09) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.09) * 50 * 20)}px)`, fontSize: '0.85em', background: 'linear-gradient(135deg, #00f2ff 0%, #7000ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Future-Invo</span>
+              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.09) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.09) * 50 * 20)}px)`, fontSize: '0.85em', background: 'linear-gradient(135deg, #00f2ff 0%, #7000ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Future Invo Solutions</span>
             </h1>
           </div>
 
@@ -673,13 +673,17 @@ export default function Home() {
   useReveal();
   useCountUp();
   const [openFaq, setOpenFaq] = useState(null);
+  const [showAllIndustries, setShowAllIndustries] = useState(false);
 
   const techItems = ['React', 'Node.js', 'Python', 'AWS', 'Docker', 'MongoDB'];
 
   const faqs = [
     { q: "What is your typical project timeline?", a: "Project timelines vary depending on complexity, but most projects range from 4 to 12 weeks from kickoff to launch." },
     { q: "What technologies do you use?", a: "We specialize in modern web and mobile stacks, including React, Node.js, Python, AWS, Docker, and MongoDB among others." },
-    { q: "Is ongoing support included?", a: "Yes, we offer various support and maintenance packages post-launch to ensure your product remains secure, updated, and highly performant." }
+    { q: "Is ongoing support included?", a: "Yes, we offer various support and maintenance packages post-launch to ensure your product remains secure, updated, and highly performant." },
+    { q: "Do we own the source code after completion?", a: "Absolutely. Once the project is completed and fully paid for, full intellectual property rights and the complete source code are transferred to you." },
+    { q: "How do you ensure app security & scalability?", a: "We build with a cloud-native, zero-trust approach. Our architectures utilize enterprise-grade encryption, automated scaling via Kubernetes/AWS, and undergo rigorous stress testing." },
+    { q: "How do we start a project with you?", a: "Simply reach out via our contact form or email. We'll schedule an initial discovery call to map out your requirements, timeline, and technical trajectory, followed by a formal proposal." }
   ];
 
   return (
@@ -906,15 +910,19 @@ export default function Home() {
           
           <div className="domain-cluster-grid">
             {[
-              { icon: <Crosshair size={32}/>, title: 'Healthcare', metric: 'HIPAA Sync', color: '#ff4b4b' },
-              { icon: <BarChart size={32}/>, title: 'Fintech', metric: '99.9% Uptime', color: '#00f2ff' },
-              { icon: <ShoppingCart size={32}/>, title: 'E-commerce', metric: '2M+ Daily Tx', color: '#ff00ff' },
-              { icon: <GraduationCap size={32}/>, title: 'EdTech', metric: 'Global Scale', color: '#ffa500' },
-            ].map((domain, i) => (
+              { icon: <Crosshair size={32}/>, title: 'Healthcare', metric: 'HIPAA Sync', color: '#ff4b4b', slug: 'healthcare' },
+              { icon: <BarChart size={32}/>, title: 'Fintech', metric: '99.9% Uptime', color: '#00f2ff', slug: 'fintech' },
+              { icon: <ShoppingCart size={32}/>, title: 'E-commerce', metric: '2M+ Daily Tx', color: '#ff00ff', slug: 'ecommerce' },
+              { icon: <GraduationCap size={32}/>, title: 'EdTech', metric: 'Global Scale', color: '#ffa500', slug: 'edtech' },
+              { icon: <Shield size={32}/>, title: 'Cybersecurity', metric: 'Zero-Trust', color: '#00ff88', slug: 'cybersecurity' },
+              { icon: <Brain size={32}/>, title: 'AI & Data', metric: 'Predictive ROI', color: '#7000ff', slug: 'ai-data' },
+              { icon: <Briefcase size={32}/>, title: 'Enterprise', metric: 'Automated Workflows', color: '#00ccff', slug: 'enterprise' },
+              { icon: <Activity size={32}/>, title: 'Telecom', metric: 'Low Latency', color: '#ffd700', slug: 'telecom' }
+            ].slice(0, showAllIndustries ? 8 : 4).map((domain, i) => (
               <div 
-                className="domain-card-premium reveal" 
+                className={`domain-card-premium reveal ${i >= 4 ? 'visible' : ''}`} 
                 key={i}
-                style={{ '--domain-color': domain.color, '--reveal-delay': `${i * 0.1}s` }}
+                style={{ '--domain-color': domain.color, '--reveal-delay': `${(i % 4) * 0.1}s` }}
               >
                 <div className="domain-card-inner">
                   <div className="domain-icon-aura">
@@ -931,6 +939,16 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="center reveal" style={{ marginTop: '3rem' }}>
+            <button 
+              onClick={() => setShowAllIndustries(!showAllIndustries)} 
+              className="btn btn-secondary" 
+              style={{ padding: '14px 36px', fontSize: '1.05rem', letterSpacing: '1px', display: 'inline-flex', alignItems: 'center' }}
+            >
+              {showAllIndustries ? 'Show Less' : 'Read More'} <ArrowRight size={20} style={{ marginLeft: '10px', transform: showAllIndustries ? 'rotate(-90deg)' : 'rotate(90deg)', transition: 'transform 0.3s ease' }} />
+            </button>
           </div>
         </div>
       </section>
@@ -1085,72 +1103,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3.13 Pricing — Investment Architecture Redesign */}
-      <section className="section-padding pricing-premium">
-        <div className="container">
-          <div className="section-header center reveal">
-            <span className="sub-heading">Transparent Investment</span>
-            <h2>Select Your <span className="gradient-text">Success Tier</span></h2>
-          </div>
-          
-          <div className="pricing-premium-grid">
-            {[
-              { 
-                name: 'Essential', 
-                price: '$1,999', 
-                per: '/start', 
-                features: ['UI/UX Blueprint', 'Core Web Platform', 'Standard Security', '30 Days Support'],
-                featured: false,
-                color: 'var(--text-muted)'
-              },
-              { 
-                name: 'Professional', 
-                price: '$4,999', 
-                per: '/start', 
-                features: ['Premium Custom Design', 'Full-Stack Ecosystem', 'API & Third-Party Sync', '180 Days Priority Support'],
-                featured: true,
-                color: 'var(--accent-cyan)'
-              },
-              { 
-                name: 'Enterprise', 
-                price: 'Custom', 
-                per: '/quote', 
-                features: ['Complex Architectures', 'Cloud Native & DevOps', 'Specialized AI Models', '24/7 Dedicated Squad'],
-                featured: false,
-                color: 'var(--accent-purple)'
-              },
-            ].map((plan, i) => (
-              <div className={`tier-card-premium reveal ${plan.featured ? 'featured' : ''}`} key={i}>
-                {plan.featured && <div className="tier-popular-tag">Most Optimized</div>}
-                
-                <div className="tier-header">
-                  <h3>{plan.name}</h3>
-                  <div className="tier-price-box">
-                    <span className="tier-currency">$</span>
-                    <span className="tier-amount">{plan.price.replace('$', '')}</span>
-                    <span className="tier-per">{plan.per}</span>
-                  </div>
-                </div>
-
-                <ul className="tier-features-list">
-                  {plan.features.map(f => (
-                    <li key={f}>
-                      <div className="tier-check"><Check size={14} /></div>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button className={`tier-cta-btn ${plan.featured ? 'primary' : 'secondary'}`}>
-                  {plan.name === 'Enterprise' ? 'Initiate Consultation' : 'Select This Tier'}
-                </button>
-                
-                <div className="tier-card-bg-gradient" style={{ background: plan.featured ? 'radial-gradient(circle at 100% 0%, rgba(0, 242, 255, 0.15), transparent 70%)' : '' }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 3.14 FAQ Section — Knowledge Grid Redesign */}
       <section className="section-padding faq-premium">
@@ -1201,21 +1153,21 @@ export default function Home() {
                   <div className="p-info-icon"><Mail size={20} /></div>
                   <div>
                     <label>Transmission</label>
-                    <p>hello@futureinvo.com</p>
+                    <p>info@futureinvo.com</p>
                   </div>
                 </div>
                 <div className="p-info-item">
                   <div className="p-info-icon"><Phone size={20} /></div>
                   <div>
                     <label>Direct Sync</label>
-                    <p>+1 (555) 123-4567</p>
+                    <p>+91 73868 79818</p>
                   </div>
                 </div>
                 <div className="p-info-item">
                   <div className="p-info-icon"><MapPin size={20} /></div>
                   <div>
                     <label>HQ Coordinates</label>
-                    <p>Silicon Valley, CA 94025</p>
+                    <p>Pathrika Nagar, Street No:1,<br/>HITEC City, Hyderabad – 500081</p>
                   </div>
                 </div>
               </div>

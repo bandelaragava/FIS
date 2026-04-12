@@ -134,7 +134,7 @@ export default function About() {
             {[
               { year: '2026', title: 'Global Node Deployment', desc: 'Activated strategic operation hubs in Silicon Valley and London, bridging the transatlantic digital divide.', status: 'DEPLOYED', icon: <Globe size={20}/> },
               { year: '2024', title: 'Neural Core Alpha', desc: 'Launched specialized Synthetic Intelligence wing, deploying custom LLM architectures for high-frequency fintech.', status: 'OPERATIONAL', icon: <Rocket size={20}/> },
-              { year: '2022', title: 'System Initialized', desc: 'Future-Invo protocol established by a syndicate of senior architects focused on cloud-native dominance.', status: 'INITIALIZED', icon: <Trophy size={20}/> },
+              { year: '2022', title: 'System Initialized', desc: 'Future Invo Solutions protocol established by a syndicate of senior architects focused on cloud-native dominance.', status: 'INITIALIZED', icon: <Trophy size={20}/> },
             ].map((m, i) => (
               <div className={`timeline-node ${i % 2 === 0 ? 'node-left' : 'node-right'}`} key={i}>
                 <div className="node-hologram">

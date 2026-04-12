@@ -122,7 +122,7 @@ export default function About() {
       </section>
 
       {/* Premium Temporal Backbone - Evolution Section */}
-      <section className="section-padding premium-temporal">
+      <section className="section-padding premium-temporal" style={{ paddingTop: '2rem' }}>
         <div className="container">
           <div className="premium-section-header center reveal">
             <span className="premium-sub-heading">Operational History</span>

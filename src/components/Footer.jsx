@@ -22,10 +22,7 @@ export default function Footer() {
             Architecting the digital frontier through high-bandwidth engineering
             and precision design.
           </p>
-          <div className="system-vital">
-            <Activity size={14} className="vital-pulse" />
-            <span>SYSTEM STATUS: OPERATIONAL</span>
-          </div>
+
         </div>
 
         <div className="footer-v-section">

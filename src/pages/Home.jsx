@@ -853,7 +853,7 @@ export default function Home() {
       <FeaturedPortfolio />
 
       {/* 3.8 Technologies Section — Tech Orion Redesign */}
-      <section className="tech-orion section-padding">
+      <section className="tech-orion section-padding" style={{ paddingBottom: '2rem' }}>
         <div className="container center reveal">
           <span className="sub-heading">Infinite Stack</span>
           <h2>The <span className="gradient-text">Tech Orion</span></h2>
@@ -897,7 +897,7 @@ export default function Home() {
       </section>
 
       {/* 3.9 Industries — Strategic Domain Cluster Redesign */}
-      <section className="section-padding industries-premium">
+      <section className="section-padding industries-premium" style={{ paddingTop: '2rem' }}>
         <div className="container">
           <div className="section-header center reveal">
             <span className="sub-heading">Strategic Domains</span>
@@ -1026,8 +1026,8 @@ export default function Home() {
         <div className="container">
           <div className="stats-meta-hub reveal">
             {[
-              { val: '240+', label: 'Digital Products', sub: 'Engineered & Launched' },
-              { val: '180+', label: 'Global Clients', sub: 'Inc. 40 Fortune 500s' },
+              { val: '40+', label: 'Digital Products', sub: 'Engineered & Launched' },
+              { val: '25+', label: 'Global Clients', sub: 'Startups & Enterprises' },
               { val: '99.8%', label: 'Infrastructure uptime', sub: 'AWS & Azure cloud sync' },
             ].map((stat, i) => (
               <div className="meta-stat-block" key={i}>

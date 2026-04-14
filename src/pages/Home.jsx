@@ -693,12 +693,16 @@ export default function Home() {
 
       {/* 3.2 Trusted By Section */}
       <section className="tech-stack-marquee">
-        <div className="container center mb-4">
-          <p className="marquee-subtext">Trusted By Global Brands</p>
+        <div className="container center mb-5">
+          <div className="marquee-header-wrap">
+            <div className="marquee-line" />
+            <p className="marquee-subtext">Trusted By Global Brands</p>
+            <div className="marquee-line" />
+          </div>
         </div>
         <div className="tech-marquee p-0">
           <div className="marquee-content" style={{ animationDuration: '40s' }}>
-            {['Acme Corp', 'GlobalTech', 'InnovateInc', 'NextGen Solutions', 'Apex Systems', 'Acme Corp', 'GlobalTech', 'InnovateInc', 'NextGen Solutions', 'Apex Systems'].map((t, i) => (
+            {['Branic', 'Aravind Realtors', 'Akshaya Chits', 'Flexi Works', 'Navajyothi', 'Swgruha Sweets', 'Branic', 'Aravind Realtors', 'Akshaya Chits', 'Flexi Works', 'Navajyothi', 'Swgruha Sweets'].map((t, i) => (
               <div className="tech-tag" key={i} style={{ fontSize: '1.5rem', WebkitTextStroke: '0', color: 'rgba(255,255,255,0.4)' }}>{t}</div>
             ))}
           </div>

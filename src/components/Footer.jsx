@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Linkedin, Github, Activity, Globe, ShieldCheck } from 'lucide-react';
+import { Twitter, Linkedin, Facebook, Instagram, Youtube, Activity, Globe, ShieldCheck } from 'lucide-react';
 import logoImg from '../assets/logo-new.png';
 
 export default function Footer() {
@@ -49,14 +49,20 @@ export default function Footer() {
         <div className="footer-v-section social-matrix">
           <h4 className="v-label">Global Nodes</h4>
           <div className="social-node-list">
-            <a href="#" className="social-node-item" aria-label="Twitter">
+            <a href="https://x.com/FutureInvo2025" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="Twitter">
               <Twitter size={20} />
             </a>
-            <a href="#" className="social-node-item" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/company/future-invo-solutions/" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="LinkedIn">
               <Linkedin size={20} />
             </a>
-            <a href="#" className="social-node-item" aria-label="GitHub">
-              <Github size={20} />
+            <a href="https://www.facebook.com/share/18HE7JNhW6/" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="Facebook">
+              <Facebook size={20} />
+            </a>
+            <a href="https://www.instagram.com/futureinvosolutions?igsh=czRkMGw0NHd3eXl3" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="Instagram">
+              <Instagram size={20} />
+            </a>
+            <a href="https://youtube.com/@futureinvosolutions?si=UMdsKa0i_axjx0Jv" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="Youtube">
+              <Youtube size={20} />
             </a>
           </div>
           <div className="region-badge">

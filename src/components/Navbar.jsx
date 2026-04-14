@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, Facebook, Linkedin, Instagram, Mail, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, Facebook, Linkedin, Instagram, Twitter, Youtube, Mail, Phone } from 'lucide-react';
 import logoImg from '../assets/logo-new.png';
 
 const serviceList = [
@@ -182,9 +182,11 @@ export default function Navbar() {
           <div className="modal-social">
             <span>Follow Us:</span>
             <div className="icons">
-              <Facebook size={18} />
-              <Linkedin size={18} />
-              <Instagram size={18} />
+              <a href="https://www.facebook.com/share/18HE7JNhW6/" target="_blank" rel="noopener noreferrer"><Facebook size={18} /></a>
+              <a href="https://www.linkedin.com/company/future-invo-solutions/" target="_blank" rel="noopener noreferrer"><Linkedin size={18} /></a>
+              <a href="https://www.instagram.com/futureinvosolutions?igsh=czRkMGw0NHd3eXl3" target="_blank" rel="noopener noreferrer"><Instagram size={18} /></a>
+              <a href="https://x.com/FutureInvo2025" target="_blank" rel="noopener noreferrer"><Twitter size={18} /></a>
+              <a href="https://youtube.com/@futureinvosolutions?si=UMdsKa0i_axjx0Jv" target="_blank" rel="noopener noreferrer"><Youtube size={18} /></a>
             </div>
           </div>
         </div>

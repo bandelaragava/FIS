@@ -91,11 +91,15 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Menu Overlay */}
       <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
+        <div className="mobile-menu-header">
+          <span>Navigation Menu</span>
+        </div>
+        
         {navItems.map((item) => (
-          <React.Fragment key={item.path}>
-            <div className="mobile-nav-item">
+          <div key={item.path} className="mobile-nav-item">
+            <div className="mobile-nav-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <NavLink
                 to={item.path}
                 className={({ isActive }) => isActive ? 'active' : ''}
@@ -107,11 +111,13 @@ export default function Navbar() {
                 <button
                   className="mobile-dropdown-toggle"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
+                  aria-label="Toggle services list"
                 >
                   <ChevronDown size={20} className={dropdownOpen ? 'open' : ''} />
                 </button>
               )}
             </div>
+            
             {item.hasDropdown && dropdownOpen && (
               <div className="mobile-dropdown-list">
                 {serviceList.map((service) => (
@@ -125,11 +131,18 @@ export default function Navbar() {
                 ))}
               </div>
             )}
-          </React.Fragment>
+          </div>
         ))}
-        <button onClick={() => { closeMobile(); setIsModalOpen(true); }} className="btn btn-primary" style={{ marginTop: '1rem' }}>
-          Get Started
-        </button>
+        
+        <div className="mobile-nav-item" style={{ marginTop: '2rem' }}>
+          <button 
+            onClick={() => { closeMobile(); setIsModalOpen(true); }} 
+            className="btn btn-primary btn-mobile-cta" 
+            style={{ width: '100%', padding: '1.2rem', borderRadius: '16px' }}
+          >
+            Get Started
+          </button>
+        </div>
       </div>
 
       {/* Get Started Modal */}

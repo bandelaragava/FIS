@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Linkedin, Facebook, Instagram, Youtube, Activity, Globe, ShieldCheck } from 'lucide-react';
+import { Linkedin, Facebook, Instagram, Youtube, Activity, Globe, ShieldCheck } from 'lucide-react';
 import logoImg from '../assets/logo-new.png';
 
 export default function Footer() {
@@ -49,8 +49,10 @@ export default function Footer() {
         <div className="footer-v-section social-matrix">
           <h4 className="v-label">Global Nodes</h4>
           <div className="social-node-list">
-            <a href="https://x.com/FutureInvo2025" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="Twitter">
-              <Twitter size={20} />
+            <a href="https://x.com/FutureInvo2025" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="X (formerly Twitter)">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
             </a>
             <a href="https://www.linkedin.com/company/future-invo-solutions/" target="_blank" rel="noopener noreferrer" className="social-node-item" aria-label="LinkedIn">
               <Linkedin size={20} />
@@ -65,20 +67,13 @@ export default function Footer() {
               <Youtube size={20} />
             </a>
           </div>
-          <div className="region-badge">
-            <Globe size={14} />
-            <span>GLOBAL PRESENCE</span>
-          </div>
+
         </div>
       </div>
 
       <div className="footer-terminal-bottom">
         <div className="container flex-between">
-          <p className="copyright-txt">&copy; 2026 Future Invo Solutions. Secured by <span className="shield-txt"><ShieldCheck size={12} /> Quantum Guard</span></p>
-          <div className="terminal-meta">
-            <span>LOCAL: 127.0.0.1</span>
-            <span>BUILD: v4.2.0-STABLE</span>
-          </div>
+          <p className="copyright-txt">&copy; 2026 Future Invo Solutions.</p>
         </div>
       </div>
     </footer>

@@ -109,14 +109,14 @@ export default function Contact() {
 
               <div className="map-placeholder glass-card" style={{ padding: 0, overflow: 'hidden' }}>
                 <iframe 
-                  src="https://maps.google.com/maps?q=17.458629,78.374968&t=m&z=15&output=embed&iwloc=near"
+                  src="https://maps.google.com/maps?q=3rd+Floor+FUTURE+INVO+SOLUTIONS+Think+Space+Building+Street+Number+1+Patrika+Nagar+HITEC+City+Hyderabad+500081&t=m&z=16&output=embed&iwloc=near"
                   width="100%" 
                   height="100%" 
                   style={{ border: 0, minHeight: '100%' }} 
                   allowFullScreen="" 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Future Invo Solutions Headquarters"
+                  title="Future Invo Solutions - 3rd Floor, Think Space Building, HITEC City, Hyderabad"
                 ></iframe>
               </div>
             </div>

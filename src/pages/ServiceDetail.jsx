@@ -147,16 +147,18 @@ export default function ServiceDetail() {
             <span className="sub-heading">Why Choose Us?</span>
             <h2>Your trusted partner for <span className="gradient-text">cutting-edge {data.subtitle}</span></h2>
           </div>
-          <div className="sd-why-grid">
-            {whyChooseUs.map((item, i) => (
-              <div className="sd-why-card reveal" key={i} style={{ '--w-delay': `${i * 0.1}s` }}>
-                <div className="sd-why-icon" style={{ color: data.color, background: `${data.color}18` }}>
-                  {item.icon}
+          <div className="sd-why-marquee-container">
+            <div className="sd-why-grid">
+              {[...whyChooseUs, ...whyChooseUs].map((item, i) => (
+                <div className="sd-why-card" key={i}>
+                  <div className="sd-why-icon" style={{ color: data.color, background: `${data.color}18` }}>
+                    {item.icon}
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.desc}</p>
                 </div>
-                <h4>{item.title}</h4>
-                <p>{item.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

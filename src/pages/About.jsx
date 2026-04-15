@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Rocket, Eye, Award, Users, Globe, Trophy } from 'lucide-react';
+import raghuVamshiImg from '../images/team/raghu_vamshi.png';
+import raghavaImg from '../images/team/raghava.png';
+import niharikaImg from '../images/team/niharika.png';
+import pravalikaImg from '../images/team/pravalika.png';
 
 function useReveal() {
   useEffect(() => {
@@ -166,13 +170,14 @@ export default function About() {
             <h2>Neural <span className="gradient-text">Talent Nodes</span></h2>
           </div>
           
-          <div className="neural-grid mt-5">
+          <div className="neural-grid neural-grid-4 mt-5">
             {[
-              { name: 'Alice Wong', role: 'Chief Architect', spec: 'L5 SYSTEMS', img: 'https://i.pravatar.cc/300?u=12', color: 'var(--accent-cyan)' },
-              { name: 'David Miller', role: 'Neural Lead', spec: 'DEEP LEARNING', img: 'https://i.pravatar.cc/300?u=24', color: 'var(--accent-purple)' },
-              { name: 'Elena Petrova', role: 'UX Principal', spec: 'COGNITIVE DESIGN', img: 'https://i.pravatar.cc/300?u=36', color: '#ff00ff' },
+              { name: 'Raghu Vamshi', role: 'Chairman & Managing Director', spec: 'LEADERSHIP', img: raghuVamshiImg, color: 'var(--accent-cyan)' },
+              { name: 'Raghava', role: 'System Architect', spec: 'ARCHITECTURE', img: raghavaImg, color: 'var(--accent-purple)' },
+              { name: 'Niharika', role: 'Software Developer', spec: 'SDE', img: niharikaImg, color: '#ff00ff' },
+              { name: 'Pravalika', role: 'Software Developer', spec: 'SDE', img: pravalikaImg, color: '#00ffaa' },
             ].map((m, i) => (
-              <div className="neural-node reveal" key={i} style={{ '--node-accent': m.color }}>
+              <div className="neural-node reveal" key={i} style={{ '--node-accent': m.color, '--reveal-delay': `${i * 0.12}s` }}>
                 <div className="node-scanner" />
                 <div className="node-visual">
                   <div className="member-frame">

@@ -702,7 +702,7 @@ export default function Home() {
         </div>
         <div className="tech-marquee p-0">
           <div className="marquee-content" style={{ animationDuration: '40s' }}>
-            {['Branic', 'Aravind Realtors', 'Akshaya Chits', 'Flexi Works', 'Navajyothi', 'Swgruha Sweets', 'Branic', 'Aravind Realtors', 'Akshaya Chits', 'Flexi Works', 'Navajyothi', 'Swgruha Sweets'].map((t, i) => (
+            {['Aravind Realtors', 'Akshaya Chits', 'Flexi Works', 'Navajyothi', 'Swgruha Sweets', 'Aravind Realtors', 'Akshaya Chits', 'Flexi Works', 'Navajyothi', 'Swgruha Sweets'].map((t, i) => (
               <div className="tech-tag" key={i} style={{ fontSize: '1.5rem', WebkitTextStroke: '0', color: 'rgba(255,255,255,0.4)' }}>{t}</div>
             ))}
           </div>

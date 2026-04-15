@@ -10,6 +10,7 @@ import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import ParticleBackground from './components/ParticleBackground';
 import ServiceDetail from './pages/ServiceDetail';
+import WelcomePopup from './components/WelcomePopup';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -25,6 +26,7 @@ export default function App() {
       <ScrollToTop />
       {/* State-of-the-Art Interactive Canvas Background System */}
       <ParticleBackground />
+      <WelcomePopup />
       <Navbar />
       <main>
         <Routes>

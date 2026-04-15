@@ -1,0 +1,210 @@
+.welcome-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 20, 0.85); /* Deep dark glass background */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.welcome-popup-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Glowing Background Orbs */
+.popup-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  animation: orbFloat 6s ease-in-out infinite alternate;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(56, 189, 248, 0.3); /* Cyan Glow */
+  top: -100px;
+  left: -100px;
+}
+
+.orb-2 {
+  width: 350px;
+  height: 350px;
+  background: rgba(129, 140, 248, 0.25); /* Indigo Glow */
+  bottom: -50px;
+  right: -50px;
+  animation-delay: -3s;
+}
+
+/* Popup Container with 3D Effect */
+.welcome-popup-content {
+  position: relative;
+  max-width: 650px;
+  width: 90%;
+  padding: 4.5rem 3rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 32px;
+  box-shadow: 
+    0 40px 80px rgba(0, 0, 0, 0.8), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 40px rgba(56, 189, 248, 0.05);
+  text-align: center;
+  overflow: hidden;
+  z-index: 10;
+  transform-style: preserve-3d;
+  animation: popup3DEntry 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Subtle Grid Background Pattern for Tech Feel */
+.popup-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0;
+  animation: fadeIn 1s 0.5s ease forwards;
+  pointer-events: none;
+}
+
+/* Shimmering Animated Border */
+.welcome-popup-content::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(56,189,248,0.8), rgba(129,140,248,0.2), rgba(56,189,248,0.8));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRotate 4s linear infinite;
+  background-size: 200% 200%;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.welcome-popup-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Styled Floating Badge */
+.popup-badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 50px;
+  color: #38bdf8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+  animation: floatUpDown 3s ease-in-out infinite;
+}
+
+.welcome-popup-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.welcome-popup-title .gradient-text-1 {
+  background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-popup-text {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.welcome-popup-text strong {
+  display: block;
+  font-size: 1.9rem;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+/* Creative Animated Line Replacing Basic Loader */
+.popup-creative-line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 2rem;
+}
+
+.popup-creative-dot {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8;
+  animation: scanLine 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Animations */
+@keyframes popup3DEntry {
+  0% { 
+    transform: perspective(1000px) rotateX(20deg) scale(0.8) translateY(80px); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: perspective(1000px) rotateX(0deg) scale(1) translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes orbFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 40px) scale(1.1); }
+}
+
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes scanLine {
+  0% { left: 0%; opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: calc(100% - 8px); opacity: 0; }
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}

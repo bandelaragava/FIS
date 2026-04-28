@@ -221,11 +221,11 @@ export default function Portfolio() {
               Partner with our elite squads to transform your ambitious visions into 
               bulletproof, high-performing digital realities. 
             </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
-              <Link to="/contact" className="btn btn-primary" style={{ padding: '18px 45px', fontSize: '1.1rem' }}>
+            <div className="portfolio-cta-actions">
+              <Link to="/contact" className="btn btn-primary">
                 Start Development Nexus
               </Link>
-              <Link to="/services" className="btn btn-secondary" style={{ padding: '18px 45px', fontSize: '1.1rem' }}>
+              <Link to="/services" className="btn btn-secondary">
                 Analyze Stack
               </Link>
             </div>

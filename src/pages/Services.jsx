@@ -40,17 +40,17 @@ const services = [
   },
   {
     icon: <Smartphone />, color: '#0070ff', accent: 'blue',
-    title: 'Mobile Ecosystems',
+    title: 'Mobile App Development',
     level: 'CROSS PLATFORM',
-    desc: 'Developing high-fidelity iOS and Android solutions that offer native performance with unified codebases.',
-    tags: ['SwiftUI / Kotlin', 'React Native', 'Flutter Logic', 'Offline Sync'],
+    desc: 'Secure, high-performance, and user-friendly applications for Android and iOS designed to improve customer engagement and simplify business operations.',
+    tags: ['Android App Development', 'iOS App Development', 'Flutter & React Native', 'Ionic App Development'],
   },
   {
     icon: <Megaphone />, color: '#00f2ff', accent: 'cyan',
-    title: 'Performance Marketing',
+    title: 'Digital Marketing Solutions',
     level: 'DATA DRIVEN',
-    desc: 'Algorithm-optimized campaigns designed to maximize ROI through deep technical SEO and behavioral analytics.',
-    tags: ['Search Engine Sync', 'Social Engineering', 'LTV Analysis', 'Conversion Logic'],
+    desc: 'We provide result-driven digital marketing solutions that enhance brand visibility, generate qualified leads, and accelerate business growth.',
+    tags: ['Search Engine Optimization', 'Social Media Marketing', 'Search Engine Marketing', 'Pay Per Click'],
   },
   {
     icon: <BrainCircuit />, color: '#ff00ff', accent: 'magenta',
@@ -180,6 +180,7 @@ export default function Services() {
       </section>
 
       {/* Pricing Section — Synchronized with Home */}
+      {/* 
       <section className="section-padding pricing-section-alt">
         <div className="container">
           <div className="section-header center reveal">
@@ -240,6 +241,7 @@ export default function Services() {
           </div>
         </div>
       </section>
+      */}
     </div>
   );
 }

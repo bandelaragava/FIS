@@ -55,11 +55,25 @@ function ScrollHero() {
   const cursorRef = React.useRef(null);
   const [progress, setProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [introVisible, setIntroVisible] = useState(false);
+  const isSmall = isMobile || isTablet;
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 992);
-    const handleResize = () => setIsMobile(window.innerWidth < 992);
-    window.addEventListener('resize', handleResize);
+    const timer = setTimeout(() => {
+      setIntroVisible(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const checkSize = () => {
+      const w = window.innerWidth;
+      setIsMobile(w < 768);
+      setIsTablet(w >= 768 && w < 1200);
+    };
+    checkSize();
+    window.addEventListener('resize', checkSize);
 
     const handleMouseMove = (e) => {
       if (cursorRef.current && window.scrollY < 50) {
@@ -73,6 +87,13 @@ function ScrollHero() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           if (!containerRef.current) return;
+          
+          // Disable scroll-based animation on mobile/tablet to fix "scroll y-axis" issue
+          if (window.innerWidth < 1200) {
+            ticking = false;
+            return;
+          }
+
           const rect = containerRef.current.getBoundingClientRect();
           const scrollDistance = rect.height - window.innerHeight;
           let p = -rect.top / scrollDistance;
@@ -89,37 +110,87 @@ function ScrollHero() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', checkSize);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
-  // Calculate the "pull away" layout factor
+  // Auto-cycle slides logic removed in favor of natural stacking on mobile
+
+  if (isSmall) {
+    return (
+      <div className="mobile-hero-stack">
+        {/* Main Intro */}
+        <div className="mobile-hero-slide intro">
+          <video src="/FISHeroVideo.mp4" autoPlay loop muted playsInline className="mobile-hero-video" />
+          <div className="mobile-hero-content">
+             <h1 className="intro-title" style={{ fontSize: isMobile ? '1.8rem' : '2.8rem', opacity: 1 }}>
+              Future Invo Solutions – <br/>
+              <span style={{ background: 'linear-gradient(135deg, #00f2ff 0%, #7000ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Transforming Businesses with AI & IT Services</span>
+            </h1>
+          </div>
+        </div>
+
+        {/* Section 1 */}
+        <div className="mobile-hero-slide" style={{ opacity: 1 }}>
+          <span className="sub-heading">01 // Digital Growth</span>
+          <h1>Empowering <span className="gradient-text">Digital Growth</span></h1>
+          <p>We provide cutting-edge AI & IT services that drive innovation and digital transformation for your business.</p>
+          <div className="hero-stats">
+            <div className="stat-item"><span className="stat-number">10+</span><span className="stat-label">Years Exp</span></div>
+            <div className="stat-item"><span className="stat-number">200+</span><span className="stat-label">Projects</span></div>
+          </div>
+        </div>
+
+        {/* Section 2 */}
+        <div className="mobile-hero-slide" style={{ opacity: 1 }}>
+          <span className="sub-heading" style={{ color: 'var(--accent-purple)' }}>02 // Smart AI</span>
+          <h1>Intelligent <span className="gradient-text" style={{ backgroundImage: 'linear-gradient(135deg, #00f2ff 0%, #ff00ff 100%)' }}>Automation</span></h1>
+          <p>Future-proof your business with smart AI solutions, predictive analytics, and advanced machine learning models.</p>
+          <a href="#services" className="btn btn-primary">Analyze AI</a>
+        </div>
+
+        {/* Section 3 */}
+        <div className="mobile-hero-slide" style={{ opacity: 1 }}>
+          <span className="sub-heading" style={{ color: '#ff00ff' }}>03 // Expert IT</span>
+          <h1>Complete <span className="gradient-text" style={{ backgroundImage: 'linear-gradient(135deg, #ff00ff 0%, #7000ff 100%)' }}>IT Services</span></h1>
+          <p>From cloud migration to cybersecurity, we deliver tailored technology solutions to enhance productivity.</p>
+          <a href="#contact" className="btn btn-primary">Start Discovery</a>
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop Calculations (Restored)
   let tShape = 0;
   if (progress > 0.10 && progress <= 0.25) {
     tShape = (progress - 0.10) / 0.15;
-    tShape = 1 - Math.pow(1 - tShape, 3); // Ease out cubic
+    tShape = 1 - Math.pow(1 - tShape, 3);
   } else if (progress > 0.25) {
     tShape = 1;
   }
 
-  // Calculate text slide opacities
   const s1 = progress >= 0.20 && progress < 0.45 ? Math.min(1, (progress - 0.20) * 10, (0.45 - progress) * 10) : 0;
   const s2 = progress >= 0.45 && progress < 0.70 ? Math.min(1, (progress - 0.45) * 10, (0.70 - progress) * 10) : 0;
   const s3 = progress >= 0.70 ? Math.min(1, (progress - 0.70) * 10) : 0;
 
-  // Render elements safely
-  const pTop = `${tShape * (isMobile ? 1 : 2)}rem`;
-  const pRight = `${tShape * (isMobile ? 1 : 2)}rem`;
-  const pBottom = isMobile ? `calc(${tShape * 1}rem + ${tShape * 45}vh)` : `${tShape * 2}rem`;
-  const pLeft = isMobile ? `${tShape * 1}rem` : `calc(${tShape * 2}rem + ${tShape * 45}vw)`;
-  const bRadius = `${tShape * 24}px`;
+  const pGap = isMobile ? 1 : isTablet ? 1.5 : 2;
+  const pTop = `${tShape * pGap}rem`;
+  const pRight = `${tShape * pGap}rem`;
+  const pBottom = isSmall
+    ? `calc(${tShape * pGap}rem + ${tShape * (isMobile ? 45 : 40)}vh)`
+    : `${tShape * pGap}rem`;
+  const pLeft = isSmall
+    ? `${tShape * pGap}rem`
+    : `calc(${tShape * pGap}rem + ${tShape * 42}vw)`;
+  const bRadius = `${tShape * (isMobile ? 16 : isTablet ? 20 : 24)}px`;
 
   return (
-    <div ref={containerRef} className="scroll-hero-container" style={{ cursor: progress < 0.05 && !isMobile ? 'none' : 'default' }}>
+    <div ref={containerRef} className="scroll-hero-container" style={{ cursor: progress < 0.05 ? 'none' : 'default' }}>
       <div className="scroll-hero-sticky">
+...
 
-        <div ref={cursorRef} className="scroll-indicator-cursor" style={{ opacity: progress < 0.05 && !isMobile ? 1 : 0 }}>
+        <div ref={cursorRef} className="scroll-indicator-cursor" style={{ opacity: progress < 0.05 && !isSmall ? 1 : 0 }}>
           <div className="scroll-cursor-text">
             <span className="shimmer-text" style={{ opacity: Math.max(0, 1 - progress * 100) }}>SCROLL</span>
             <span className="shimmer-text" style={{ opacity: Math.max(0, 1 - Math.max(0, progress - 0.01) * 100) }}>TO</span>
@@ -132,39 +203,39 @@ function ScrollHero() {
 
         {/* LEFT / BOTTOM TEXT AREA (Reveals as panel pulls away) */}
         <div className="hero-panel-left" style={{
-          width: isMobile ? '100%' : '50%',
-          height: isMobile ? '50%' : '100%',
-          bottom: isMobile ? 0 : 'auto',
-          top: isMobile ? 'auto' : 0,
-          padding: isMobile ? '2rem' : '4% 4rem',
+          width: isSmall ? '100%' : '50%',
+          height: isSmall ? (isMobile ? '50%' : '45%') : '100%',
+          bottom: isSmall ? 0 : 'auto',
+          top: isSmall ? 'auto' : 0,
+          padding: isMobile ? '1.5rem' : isTablet ? '2rem 3rem' : '4% 4rem',
           opacity: tShape
         }}>
           <div className="hero-slide-container">
             {/* Slide 1 */}
             <div className="hero-text-slide" style={{ opacity: s1, transform: `translateY(${(1 - s1) * 20}px)`, pointerEvents: s1 > 0.5 ? 'auto' : 'none' }}>
-              <span className="sub-heading">01 &nbsp;// &nbsp;Physical to Digital</span>
-              <h1 style={{ fontSize: isMobile ? '2.2rem' : '3.5rem' }}>Transforming <span className="gradient-text">Operations</span></h1>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem' }}>We turn complex business challenges and legacy architectures into elegant, high-performing digital products.</p>
-              <div className="hero-stats" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-                <div className="stat-item"><span className="stat-number" style={{ fontSize: '1.8rem' }}>10+</span><span className="stat-label">Years Exp</span></div>
-                <div className="stat-item"><span className="stat-number" style={{ fontSize: '1.8rem' }}>200+</span><span className="stat-label">Projects</span></div>
+              <span className="sub-heading">01 &nbsp;// &nbsp;Digital Growth</span>
+              <h1 style={{ fontSize: isMobile ? '1.9rem' : isTablet ? '2.6rem' : '3.5rem' }}>Empowering <span className="gradient-text">Digital Growth</span></h1>
+              <p style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '0.95rem' : '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>We provide cutting-edge AI & IT services that drive innovation and digital transformation for your business.</p>
+              <div className="hero-stats" style={{ display: 'flex', gap: isMobile ? '1.2rem' : '2rem', flexWrap: 'wrap' }}>
+                <div className="stat-item"><span className="stat-number" style={{ fontSize: isMobile ? '1.4rem' : '1.8rem' }}>10+</span><span className="stat-label">Years Exp</span></div>
+                <div className="stat-item"><span className="stat-number" style={{ fontSize: isMobile ? '1.4rem' : '1.8rem' }}>200+</span><span className="stat-label">Projects</span></div>
               </div>
             </div>
 
             {/* Slide 2 */}
             <div className="hero-text-slide" style={{ opacity: s2, transform: `translateY(${(1 - s2) * 20}px)`, pointerEvents: s2 > 0.5 ? 'auto' : 'none' }}>
-              <span className="sub-heading" style={{ color: 'var(--accent-purple)' }}>02 &nbsp;// &nbsp;Scale & Availability</span>
-              <h1 style={{ fontSize: isMobile ? '2.2rem' : '3.5rem' }}>Architecting the <span className="gradient-text" style={{ backgroundImage: 'linear-gradient(135deg, #00f2ff 0%, #ff00ff 100%)' }}>Next Gen</span></h1>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem' }}>Cloud-native infrastructure and resilient microservices. Future-proof your applications from day one and securely scale to millions of active users.</p>
-              <a href="#services" className="btn btn-primary">Discover Cloud</a>
+              <span className="sub-heading" style={{ color: 'var(--accent-purple)' }}>02 &nbsp;// &nbsp;Smart AI</span>
+              <h1 style={{ fontSize: isMobile ? '1.9rem' : isTablet ? '2.6rem' : '3.5rem' }}>Intelligent <span className="gradient-text" style={{ backgroundImage: 'linear-gradient(135deg, #00f2ff 0%, #ff00ff 100%)' }}>Automation</span></h1>
+              <p style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '0.95rem' : '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>Future-proof your business with smart AI solutions, predictive analytics, and advanced machine learning models to enhance decision-making.</p>
+              <a href="#services" className="btn btn-primary">Analyze AI</a>
             </div>
 
             {/* Slide 3 */}
             <div className="hero-text-slide" style={{ opacity: s3, transform: `translateY(${(1 - s3) * 20}px)`, pointerEvents: s3 > 0.5 ? 'auto' : 'none' }}>
-              <span className="sub-heading" style={{ color: '#ff00ff' }}>03 &nbsp;// &nbsp;Artificial Intelligence</span>
-              <h1 style={{ fontSize: isMobile ? '2.2rem' : '3.5rem' }}>Deliver Value at <span className="gradient-text" style={{ backgroundImage: 'linear-gradient(135deg, #ff00ff 0%, #7000ff 100%)' }}>Lightning Speed</span></h1>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem' }}>Automated pipelines powered by AI algorithms eliminate technical debt and significantly accelerate development cycles without compromising quality.</p>
-              <a href="#contact" className="btn btn-primary">Partner With Us</a>
+              <span className="sub-heading" style={{ color: '#ff00ff' }}>03 &nbsp;// &nbsp;Expert IT</span>
+              <h1 style={{ fontSize: isMobile ? '1.9rem' : isTablet ? '2.6rem' : '3.5rem' }}>Complete <span className="gradient-text" style={{ backgroundImage: 'linear-gradient(135deg, #ff00ff 0%, #7000ff 100%)' }}>IT Services</span></h1>
+              <p style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '0.95rem' : '1.05rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>From cloud migration to cybersecurity, we deliver tailored technology solutions to help your business automate and scale with ease.</p>
+              <a href="#contact" className="btn btn-primary">Start Discovery</a>
             </div>
           </div>
         </div>
@@ -177,15 +248,15 @@ function ScrollHero() {
         }}>
 
           {/* Intro Text Overlay */}
-          <div className="intro-overlay" style={{ opacity: Math.max(0, 1 - Math.max(0, progress - 0.08) * 20) }}>
-            <h1 className="intro-title" style={{ fontSize: isMobile ? '2.4rem' : '4.2rem', transform: 'translateY(15vh)', lineHeight: 1.2 }}>
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.00) * 50)), transform: `translateY(${Math.max(0, 20 - progress * 50 * 20)}px)` }}>Build </span>&nbsp;
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.015) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.015) * 50 * 20)}px)` }}>The </span><br />
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.03) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.03) * 50 * 20)}px)` }}>Future </span>&nbsp;
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.045) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.045) * 50 * 20)}px)` }}>of </span>&nbsp;
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.06) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.06) * 50 * 20)}px)` }}>IT </span><br/>
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.075) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.075) * 50 * 20)}px)`, fontSize: '0.85em', color: 'var(--text-secondary)' }}>with </span>&nbsp;
-              <span className="animated-word" style={{ opacity: Math.min(1, Math.max(0, (progress - 0.09) * 50)), transform: `translateY(${Math.max(0, 20 - Math.max(0, progress - 0.09) * 50 * 20)}px)`, fontSize: '0.85em', background: 'linear-gradient(135deg, #00f2ff 0%, #7000ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Future Invo Solutions</span>
+          <div className="intro-overlay" style={{ opacity: Math.max(0, 1 - Math.max(0, progress - 0.08) * 12) }}>
+            <h1 className="intro-title" style={{ fontSize: isMobile ? '1.8rem' : isTablet ? '2.8rem' : '4.2rem', transform: `translateY(${isSmall ? '10vh' : '12vh'})`, lineHeight: 1.2, padding: isMobile ? '0 1rem' : '0 2rem' }}>
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0s' }}>Build </span>&nbsp;
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0.1s' }}>The </span><br />
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0.2s' }}>Future </span>&nbsp;
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0.3s' }}>of </span>&nbsp;
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0.4s' }}>IT </span><br/>
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0.5s', fontSize: '0.85em', color: 'var(--text-secondary)' }}>with </span>&nbsp;
+              <span className="animated-word" style={{ opacity: introVisible ? 1 : 0, transform: introVisible ? 'translateY(0)' : 'translateY(20px)', transition: 'all 0.6s ease 0.6s', fontSize: '0.85em', background: 'linear-gradient(135deg, #00f2ff 0%, #7000ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Future Invo Solutions</span>
             </h1>
           </div>
 
@@ -211,9 +282,9 @@ function ScrollHero() {
             opacity: progress > 0.3 && progress < 0.8 ? Math.min(1, (progress - 0.3) * 5, (0.8 - progress) * 5) : 0,
             transform: `scale(${0.5 + Math.abs(progress - 0.5) * 2}) translateZ(${(0.5 - Math.abs(progress - 0.5)) * 100}px)`
           }}>
-            <Cloud size={isMobile ? 120 : 200} color="var(--accent-purple)" strokeWidth={1} style={{ filter: 'drop-shadow(0 0 40px rgba(112, 0, 255, 0.5))' }} />
-            <div style={{ width: '1px', height: '100px', background: 'linear-gradient(to bottom, var(--accent-purple), transparent)', margin: '10px 0' }}></div>
-            <Monitor size={40} color="var(--text-muted)" strokeWidth={1} />
+            <Cloud size={isMobile ? 80 : isTablet ? 140 : 200} color="var(--accent-purple)" strokeWidth={1} style={{ filter: 'drop-shadow(0 0 40px rgba(112, 0, 255, 0.5))' }} />
+            <div style={{ width: '1px', height: isMobile ? '60px' : '100px', background: 'linear-gradient(to bottom, var(--accent-purple), transparent)', margin: '10px 0' }}></div>
+            <Monitor size={isMobile ? 28 : 40} color="var(--text-muted)" strokeWidth={1} />
           </div>
 
           {/* Phase 3 Brain */}
@@ -221,9 +292,9 @@ function ScrollHero() {
             opacity: progress > 0.65 ? Math.min(1, (progress - 0.65) * 5) : 0,
             transform: `rotateZ(${(1 - progress) * -90}deg) scale(${0.8 + Math.max(0, progress - 0.65) * 1})`
           }}>
-            <Brain size={isMobile ? 150 : 250} color="#ff00ff" strokeWidth={1} style={{ filter: 'drop-shadow(0 0 60px rgba(255, 0, 255, 0.6))' }} />
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '300px', height: '300px', border: '1px solid rgba(255,0,255,0.2)', borderRadius: '50%', animation: 'spin 10s linear infinite' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '400px', height: '400px', border: '1px dashed rgba(255,0,255,0.1)', borderRadius: '50%', animation: 'spin 15s linear infinite reverse' }}></div>
+            <Brain size={isMobile ? 110 : isTablet ? 180 : 250} color="#ff00ff" strokeWidth={1} style={{ filter: 'drop-shadow(0 0 60px rgba(255, 0, 255, 0.6))' }} />
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: isMobile ? '55vw' : isTablet ? '40vw' : '300px', height: isMobile ? '55vw' : isTablet ? '40vw' : '300px', border: '1px solid rgba(255,0,255,0.2)', borderRadius: '50%', animation: 'spin 10s linear infinite' }}></div>
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: isMobile ? '75vw' : isTablet ? '55vw' : '400px', height: isMobile ? '75vw' : isTablet ? '55vw' : '400px', border: '1px dashed rgba(255,0,255,0.1)', borderRadius: '50%', animation: 'spin 15s linear infinite reverse' }}></div>
           </div>
 
         </div>
@@ -300,6 +371,7 @@ function InteractiveBridgingGap() {
                 key={idx}
                 onMouseEnter={() => setActiveItem(idx)}
                 onMouseLeave={() => setActiveItem(null)}
+                onClick={() => setActiveItem(activeItem === idx ? null : idx)}
                 className={`bridging-card ${isActive ? 'active' : ''}`}
                 style={{
                   '--card-color-1': item.color1,
@@ -428,9 +500,9 @@ function HolographicCaseHub() {
             <div className="case-portal-hud">
               <div className="hud-top-row">
                 <div className="corner-bracket top-left" />
-                <div style={{ display: 'flex', gap: '30px' }}>
-                  <div style={{ color: 'rgba(var(--accent-cyan-rgb), 0.7)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 800 }}>ID: {active.id}</div>
-                  <div style={{ color: 'rgba(var(--accent-purple-rgb), 0.7)', fontSize: '0.65rem', letterSpacing: '2px', fontWeight: 800 }}>STATUS: {active.status}</div>
+                <div className="hud-tags">
+                  <div className="hud-tag hud-tag-id">ID: {active.id}</div>
+                  <div className="hud-tag hud-tag-status">STATUS: {active.status}</div>
                 </div>
                 <div className="corner-bracket top-right" />
               </div>
@@ -496,13 +568,13 @@ function HolographicCaseHub() {
                 <div className="active-pulse-ring" />
                 <img src={c.image} alt={c.title} className="stack-item-img" />
                 <div className="stack-item-content">
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                  <div className="stack-item-meta">
                     <span style={{ fontSize: '0.65rem', color: activeIdx === i ? 'var(--accent-cyan)' : 'var(--accent-purple)', fontWeight: 800, letterSpacing: '2px' }}>PROJECT 0{i+1}</span>
                     <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>{c.status}</span>
                   </div>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: 800, lineHeight: 1.2, marginBottom: '0.4rem' }}>{c.title}</h3>
-                  <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)', letterSpacing: '1.5px' }}>{c.tag}</span>
+                  <div className="stack-item-stats">
+                    <span className="stack-item-tag">{c.tag}</span>
                     <span style={{ fontSize: '0.7rem', color: 'var(--accent-cyan)', fontWeight: 900 }}>{c.stats[0].val}</span>
                     <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.3)' }}>{c.stats[0].label}</span>
                   </div>
@@ -581,10 +653,10 @@ function FeaturedPortfolio() {
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '1400px' }}>
         <div className="section-header center reveal">
           <span className="sub-heading">Featured Excellence</span>
-          <h2 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '-2px' }}>
+          <h2 className="ep-header-title">
             Our <span className="gradient-text">Masterpieces</span>
           </h2>
-          <p className="text-secondary" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem' }}>
+          <p className="text-secondary ep-header-desc">
             Explore an interactive showcase of the hyper-scalable digital products we've engineered. 
             Hover to expand and reveal the architecture behind the success.
           </p>
@@ -678,12 +750,21 @@ export default function Home() {
   const techItems = ['React', 'Node.js', 'Python', 'AWS', 'Docker', 'MongoDB'];
 
   const faqs = [
-    { q: "What is your typical project timeline?", a: "Project timelines vary depending on complexity, but most projects range from 4 to 12 weeks from kickoff to launch." },
-    { q: "What technologies do you use?", a: "We specialize in modern web and mobile stacks, including React, Node.js, Python, AWS, Docker, and MongoDB among others." },
-    { q: "Is ongoing support included?", a: "Yes, we offer various support and maintenance packages post-launch to ensure your product remains secure, updated, and highly performant." },
-    { q: "Do we own the source code after completion?", a: "Absolutely. Once the project is completed and fully paid for, full intellectual property rights and the complete source code are transferred to you." },
-    { q: "How do you ensure app security & scalability?", a: "We build with a cloud-native, zero-trust approach. Our architectures utilize enterprise-grade encryption, automated scaling via Kubernetes/AWS, and undergo rigorous stress testing." },
-    { q: "How do we start a project with you?", a: "Simply reach out via our contact form or email. We'll schedule an initial discovery call to map out your requirements, timeline, and technical trajectory, followed by a formal proposal." }
+    { q: "What services do you provide?", a: "We provide comprehensive AI development, web/mobile apps, cloud, DevOps, cybersecurity, digital marketing, and data science solutions." },
+    { q: "How can AI help my business?", a: "AI helps by automating repetitive tasks, providing deep data insights for better decision-making, and significantly improving customer engagement." },
+    { q: "Do you provide custom AI models?", a: "Yes, we build tailor-made AI models specifically designed to fit into your unique business workflows and objectives." },
+    { q: "What industries do you work with?", a: "We have extensive experience working with Healthcare, Finance, E-commerce, Education, and Technology sectors." },
+    { q: "Do you build mobile apps?", a: "Absolutely. We build high-performance, user-centric mobile applications for both iOS and Android platforms." },
+    { q: "What is included in your cybersecurity service?", a: "Our services include thorough vulnerability assessments, proactive risk management, and robust network security measures." },
+    { q: "Do you offer cloud migration services?", a: "Yes, we provide expert migration and optimization services for AWS, Azure, and Google Cloud platforms." },
+    { q: "What are the benefits of DevOps?", a: "DevOps accelerates software delivery and ensures higher quality through automated testing, integration, and deployment pipelines." },
+    { q: "Can you help with SEO?", a: "Yes, we offer full SEO and digital marketing services to help your business reach its target audience and drive growth." },
+    { q: "Do you build SaaS products?", a: "Yes, we specialize in building scalable SaaS platforms and full-stack applications with modern tech stacks." },
+    { q: "How is project quality ensured?", a: "We follow industry best practices, implement rigorous automated testing, and conduct thorough quality assurance at every stage." },
+    { q: "Do you offer post-launch support?", a: "Yes, we provide continuous maintenance, security updates, and performance optimization after your project goes live." },
+    { q: "How long do projects typically take?", a: "Timelines vary by complexity; small projects may take a few weeks, while large-scale enterprise solutions can take several months." },
+    { q: "Are your services customizable?", a: "Yes, all our AI and IT services are fully adaptable to meet your specific business requirements and goals." },
+    { q: "How do I start a project with you?", a: "Simply contact us via our website for an initial consultation. We'll map out your technical trajectory and provide a formal proposal." }
   ];
 
   return (
@@ -719,12 +800,12 @@ export default function Home() {
             <div className="flex-header">
               <div className="header-left">
                 <span className="sub-heading">Expertise Portfolio</span>
-                <h2 className="font-giant">Our <span className="gradient-text">Service Nexus</span></h2>
+                <h2 className="font-giant">AI & <span className="gradient-text">IT Services</span></h2>
               </div>
               <div className="header-right">
                 <p className="text-secondary" style={{ maxWidth: '400px' }}>
-                  We engineer high-stake technical solutions that bridge the gap between 
-                  ambitious vision and digital reality.
+                  Future Invo Solutions delivers expert AI & IT services to help businesses automate, 
+                  innovate, and grow with modern digital solutions.
                 </p>
               </div>
             </div>
@@ -734,48 +815,57 @@ export default function Home() {
             {[
               { 
                 num: '01', 
-                status: 'HIGH PERFORMANCE', 
-                icon: <Code />, 
-                title: 'Web Engineering', 
-                slug: 'web-engineering',
-                desc: 'Hyper-responsive web platforms built with React and cutting-edge backends for sub-second latency.', 
+                status: 'PREDICTIVE', 
+                icon: <Brain />, 
+                title: 'Smart AI Solutions', 
+                slug: 'synthetic-intelligence',
+                desc: 'Stay ahead with predictive analytics, NLP, and advanced ML models integrated into your existing workflows.', 
                 color: '#7000ff' 
               },
               { 
                 num: '02', 
-                status: 'CROSS PLATFORM', 
-                icon: <Smartphone />, 
-                title: 'Mobile Ecosystems', 
-                slug: 'mobile-ecosystems',
-                desc: 'Native-feel iOS and Android applications engineered for maximum user retention and engagement.', 
+                status: 'EFFICIENT', 
+                icon: <Zap />, 
+                title: 'Intelligent Automation', 
+                slug: 'cloud-orchestration',
+                desc: 'Future-proof your business by streamlining complex processes and increasing output across all departments.', 
                 color: '#00f2ff' 
               },
               { 
                 num: '03', 
-                status: 'CLOUD NATIVE', 
-                icon: <Cloud />, 
-                title: 'Infra Automation',
-                slug: 'cloud-orchestration', 
-                desc: 'Scalable, self-healing cloud architectures powered by AWS and automated CI/CD pipelines.', 
+                status: 'SCALABLE', 
+                icon: <Code />, 
+                title: 'Web & Digital',
+                slug: 'web-engineering', 
+                desc: 'High-performance websites and custom digital products built with the latest secure and scalable technologies.', 
                 color: '#00ff88' 
               },
               { 
                 num: '04', 
-                status: 'NEURAL LOGIC', 
-                icon: <Brain />, 
-                title: 'AI Architectures',
-                slug: 'synthetic-intelligence', 
-                desc: 'Deploying custom LLMs and predictive models to automate complex decision-making processes.', 
+                status: 'USER CENTRIC', 
+                icon: <Smartphone />, 
+                title: 'Mobile App Development',
+                slug: 'mobile-app-development', 
+                desc: 'Seamless mobile experiences for iOS and Android combining high performance with intuitive user-centric design.', 
                 color: '#ff00ff' 
               },
               { 
                 num: '05', 
-                status: 'STRATEGIC SYNC', 
-                icon: <Briefcase />, 
-                title: 'Digital Strategy',
-                slug: 'it-consulting', 
-                desc: 'Expert-led consulting to roadmap your global digital transformation and market expansion.', 
+                status: 'CLOUD NATIVE', 
+                icon: <Cloud />, 
+                title: 'Cloud & DevOps',
+                slug: 'cloud-orchestration', 
+                desc: 'Migration and optimization on AWS/Azure/GCP with automated CI/CD pipelines and containerization.', 
                 color: '#ffa500' 
+              },
+              { 
+                num: '06', 
+                status: 'ZERO TRUST', 
+                icon: <Shield />, 
+                title: 'Cybersecurity',
+                slug: 'it-consulting', 
+                desc: 'Robust security measures and comprehensive assessments to ensure business stability and data protection.', 
+                color: '#00ccff' 
               },
             ].map((s, i) => (
               <div className="nexus-card reveal" key={i} style={{ '--nexus-color': s.color }}>
@@ -961,48 +1051,48 @@ export default function Home() {
       <section className="features-premium section-padding">
         <div className="container">
           <div className="section-header center reveal">
-            <span className="sub-heading">The FIS Advantage</span>
-            <h2 className="font-giant">Built for <span className="gradient-text">Excellence</span></h2>
+            <span className="sub-heading">Strategic Choice</span>
+            <h2 className="font-giant">Why <span className="gradient-text">Choose FIS?</span></h2>
             <p className="text-secondary mt-3" style={{ maxWidth: '700px', margin: '0 auto' }}>
-              We don't just deliver projects; we engineer digital legacies. Our approach combines 
-              artistic precision with technical mastery to solve your most complex challenges.
+              We leverage smart technology to accelerate your growth. Our industry experts deliver 
+              scalable, secure, and tailor-made results aligned with your specific business goals.
             </p>
           </div>
 
           <div className="features-premium-grid">
             {[
               { 
-                icon: <Users size={32} />, 
-                title: 'Elite Engineering', 
-                desc: 'A hand-picked team of senior architects and full-stack wizards dedicated to your vision.',
+                icon: <Brain size={32} />, 
+                title: 'AI-Driven Solutions', 
+                desc: 'Leveraging smart technology to accelerate growth and enhance decision-making.',
                 color: 'var(--accent-purple)',
                 delay: '0.1s'
               },
               { 
-                icon: <Zap size={32} />, 
-                title: 'Velocity First', 
-                desc: 'Agile methodologies that prioritize speed without ever sacrificing code integrity.',
+                icon: <Users size={32} />, 
+                title: 'Experienced IT Team', 
+                desc: 'Industry experts delivering scalable results with modern technology solutions.',
                 color: 'var(--accent-cyan)',
                 delay: '0.2s'
               },
               { 
-                icon: <Shield size={32} />, 
-                title: 'Fortress Security', 
-                desc: 'Enterprise-grade encryption and zero-trust protocols baked into the core architecture.',
+                icon: <BarChart size={32} />, 
+                title: 'Custom-Built Results', 
+                desc: 'Tailor-made solutions perfectly aligned with your specific business objectives.',
                 color: '#ff00ff',
                 delay: '0.3s'
               },
               { 
-                icon: <Headphones size={32} />, 
-                title: 'Sync Support', 
-                desc: 'Global assistance that speaks your language and operates in your timezone, 24/7.',
+                icon: <Shield size={32} />, 
+                title: 'Secure & Reliable', 
+                desc: 'Enterprise-grade security measures and robust data protection for peace of mind.',
                 color: '#ffa500',
                 delay: '0.4s'
               },
               { 
-                icon: <Activity size={32} />, 
-                title: 'Performance DNA', 
-                desc: 'Optimization is not an afterthought. We build for sub-second latency and infinite scale.',
+                icon: <CheckCircle size={32} />, 
+                title: 'On-Time Delivery', 
+                desc: 'Transparent planning and reliable project completion timelines you can count on.',
                 color: '#00ff88',
                 delay: '0.5s'
               },
@@ -1220,9 +1310,12 @@ export default function Home() {
             <div className="blob blob-2"></div>
           </div>
           <div className="cta-content-wrap">
-            <h2>Ready to build your <span className="gradient-text">project?</span></h2>
-            <p className="mb-4 font-normal text-secondary" style={{ maxWidth: '600px', margin: '0 auto' }}>Let's turn your vision into a high-performance digital reality with our expert engineering team.</p>
-            <Link to="/contact" className="btn btn-primary btn-large highlight-btn">Start Discovery Journey &rarr;</Link>
+            <h2>Ready to <span className="gradient-text">Transform Your Business?</span></h2>
+            <p className="mb-4 font-normal text-secondary" style={{ maxWidth: '600px', margin: '0 auto' }}>
+              Leverage our expert AI & IT services to drive measurable growth, 
+              automate your workflows, and achieve digital excellence.
+            </p>
+            <Link to="/contact" className="btn btn-primary btn-large highlight-btn">Initiate Discovery Journey &rarr;</Link>
           </div>
         </div>
       </section>

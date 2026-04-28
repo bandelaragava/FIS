@@ -1,50 +1,93 @@
 import React, { useState, useEffect } from 'react';
+import { X, Rocket, Sparkles } from 'lucide-react';
+import logoImg from '../assets/logo-new.png';
 import './WelcomePopup.css';
 
 const WelcomePopup = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isFading, setIsFading] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Start fading out at 5.5s so it fully transitions by 6s
-    const fadeTimer = setTimeout(() => {
-      setIsFading(true);
-    }, 5500);
+    // Show content after 1 second delay
+    const contentTimer = setTimeout(() => {
+      setShowContent(true);
+    }, 1000);
 
-    // Completely remove from DOM at 6s
-    const removeTimer = setTimeout(() => {
-      setIsVisible(false);
-    }, 6000);
+    // Auto-close after 10 seconds
+    const autoCloseTimer = setTimeout(() => {
+      handleClose();
+    }, 10000);
+
+    // Lock body scroll when popup is visible
+    if (isVisible) {
+      document.body.style.overflow = 'hidden';
+    }
 
     return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(removeTimer);
+      clearTimeout(contentTimer);
+      clearTimeout(autoCloseTimer);
+      document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [isVisible]);
+
+  const handleClose = () => {
+    setIsExiting(true);
+    document.body.style.overflow = 'unset';
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 800); // Match fade-out duration
+  };
 
   if (!isVisible) return null;
 
   return (
-    <div className={`welcome-popup-overlay ${isFading ? 'fade-out' : ''}`}>
-      {/* Decorative Floating Glowing Orbs */}
-      <div className="popup-orb orb-1"></div>
-      <div className="popup-orb orb-2"></div>
-      
-      <div className="welcome-popup-content">
-        <div className="popup-grid-bg"></div>
-        <div className="welcome-popup-inner">
-          <div className="popup-badge">Celebrating a Milestone</div>
-          <h2 className="welcome-popup-title">
-            <span className="gradient-text-1">Future</span> Innovation
-          </h2>
-          <p className="welcome-popup-text">
-            <strong>3+ Years of Successful Journey</strong>
-            with many satisfied clients.
-          </p>
-          
-          {/* Creative Progress Bar */}
-          <div className="popup-creative-line">
-             <div className="popup-creative-dot"></div>
+    <div className={`premium-popup-overlay ${isExiting ? 'exit' : ''}`}>
+      <div className="premium-popup-container">
+        {/* Background Decorative Elements */}
+        <div className="premium-glass-mesh"></div>
+        <div className="premium-glow-ring"></div>
+        
+        {/* Close Button */}
+        <button className="premium-close-btn" onClick={handleClose} aria-label="Close">
+          <X size={20} />
+        </button>
+
+        <div className="premium-popup-content">
+          <div className={`stagger-content ${showContent ? 'visible' : ''}`}>
+            <div className="premium-icon-wrap">
+              <div className="icon-glow"></div>
+              <img src={logoImg} alt="Future Invo Solutions Logo" className="premium-main-logo" />
+            </div>
+
+            <div className="premium-badge">
+              <Sparkles size={14} className="badge-sparkle" />
+              <span>Industry Leader</span>
+            </div>
+
+            <h2 className="premium-title">
+              <span className="text-white">Future Invo</span>
+              <span className="gradient-text-premium">Solutions</span>
+            </h2>
+
+            <div className="premium-divider">
+              <div className="divider-dot"></div>
+            </div>
+
+            <p className="premium-description">
+              <span className="highlight-text">3+ Years</span> of architecting digital excellence.
+              Empowering global brands with next-gen technical solutions.
+            </p>
+
+            <div className="premium-footer">
+              <div className="status-indicator">
+                <span className="status-dot pulse"></span>
+                <span className="status-text">System Sync Active</span>
+              </div>
+              <button className="premium-cta-btn" onClick={handleClose}>
+                Explore Now <Rocket size={16} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

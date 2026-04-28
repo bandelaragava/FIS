@@ -4,8 +4,8 @@ import { Menu, X, ChevronDown, Facebook, Linkedin, Instagram, Twitter, Youtube, 
 import logoImg from '../assets/logo-new.png';
 
 const serviceList = [
-  'IT Consulting', 'Web Engineering', 'UX/UI Architecture', 'Mobile Ecosystems',
-  'Performance Marketing', 'Synthetic Intelligence', 'Enterprise Software',
+  'IT Consulting', 'Web Engineering', 'UX/UI Architecture', 'Mobile App Development',
+  'Digital Marketing Solutions', 'Synthetic Intelligence', 'Enterprise Software',
   'Cloud Orchestration', 'Cybersecurity Guard', 'Data Intelligence', 'Emerging Frontiers',
   'Full stack web & saas development', 'Machine learning & deep learning'
 ];
@@ -77,7 +77,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <button onClick={() => setIsModalOpen(true)} className="btn btn-primary btn-nav" style={{ display: mobileOpen ? 'none' : 'inline-block' }}>
+          <button onClick={() => setIsModalOpen(true)} className="btn btn-primary btn-nav hide-on-mobile" style={{ display: mobileOpen ? 'none' : 'inline-block' }}>
             Get Started
           </button>
 
@@ -96,7 +96,7 @@ export default function Navbar() {
         <div className="mobile-menu-header">
           <span>Navigation Menu</span>
         </div>
-        
+
         {navItems.map((item) => (
           <div key={item.path} className="mobile-nav-item">
             <div className="mobile-nav-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -117,7 +117,7 @@ export default function Navbar() {
                 </button>
               )}
             </div>
-            
+
             {item.hasDropdown && dropdownOpen && (
               <div className="mobile-dropdown-list">
                 {serviceList.map((service) => (
@@ -133,11 +133,11 @@ export default function Navbar() {
             )}
           </div>
         ))}
-        
+
         <div className="mobile-nav-item" style={{ marginTop: '2rem' }}>
-          <button 
-            onClick={() => { closeMobile(); setIsModalOpen(true); }} 
-            className="btn btn-primary btn-mobile-cta" 
+          <button
+            onClick={() => { closeMobile(); setIsModalOpen(true); }}
+            className="btn btn-primary btn-mobile-cta"
             style={{ width: '100%', padding: '1.2rem', borderRadius: '16px' }}
           >
             Get Started

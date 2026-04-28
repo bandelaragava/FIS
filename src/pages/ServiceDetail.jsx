@@ -53,6 +53,12 @@ export default function ServiceDetail() {
   const serviceKey = Object.keys(servicesData).find(key => key === id);
   const data = servicesData[serviceKey];
 
+  useEffect(() => {
+    if (data) {
+      document.title = `${data.title} | Future Invo Solutions`;
+    }
+  }, [data]);
+
   if (!data) {
     return <Navigate to="/services" replace />;
   }

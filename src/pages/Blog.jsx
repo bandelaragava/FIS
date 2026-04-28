@@ -83,7 +83,7 @@ export default function Blog() {
 
       <section className="section-padding" style={{ paddingTop: '2rem' }}>
         <div className="container">
-          <div className="blog-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+          <div className="blog-grid">
             {posts.map((post, i) => (
               <article className="blog-card glass-card reveal" key={i}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
